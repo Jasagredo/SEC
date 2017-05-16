@@ -27,7 +27,7 @@ public class SELAOperations {
 		return sec.symbol("|",SESASym.DIS, "|");     
 	}    
 	public Symbol unidadNegacion() {
-		return sec.symbol("Â¬",SESASym.NEG, "¬");     
+		return sec.symbol("¬",SESASym.NEG, "¬");     
 	}  
 	public Symbol unidadOperadorMas() {
 		return sec.symbol("+",SESASym.MAS, "+"); 
