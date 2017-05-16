@@ -13,5 +13,10 @@ public class Expr {
 		this.valueA = vA;
 		this.valueB = vB;
 	}
+	
+	public String mostrar()
+	{
+		return valueA.mostrar() + " " + op.mostrar() + " " + valueB.mostrar();
+	}
 
 }

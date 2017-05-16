@@ -1,5 +1,6 @@
 package ast.Dec;
 
+import java.util.Iterator;
 import java.util.List;
 
 import ast.Expr.Base;
@@ -24,6 +25,25 @@ public class Dec {
 		this.tc = t;
 		this.i = i;
 		this.ad = ad;
+	}
+	
+	public String mostrar()
+	{
+		String r = "Declaración";
+		if (ad != null) 
+		{
+			r = r + tc.mostrar() + " ";
+			Iterator<Base> it = ad.iterator();
+			r = r + "{";
+			while(it.hasNext()) r = r + it.next().mostrar() + ",";
+			r = r + "}";
+		}
+		else 
+		{
+			r = r + " " + t.toString() + " " + i.mostrar() + " ";
+			if (e != null) r = r + e.mostrar();
+		}
+		return r;
 	}
 	
 }

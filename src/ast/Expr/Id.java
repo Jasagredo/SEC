@@ -5,4 +5,10 @@ public class Id extends Expr {
 	public Id(String i){
 		id = i;
 	}
+	
+	public String mostrar()
+	{
+		return id;
+	}
+
 }

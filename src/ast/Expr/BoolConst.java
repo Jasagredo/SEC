@@ -5,4 +5,9 @@ public class BoolConst extends Base  {
 		int  k = b ? 1 : 0 ;
 		literal = k;
 	}
+	
+	public String mostrar()
+	{
+		return ((Integer) literal).toString();
+	}
 }

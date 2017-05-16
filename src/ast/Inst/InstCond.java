@@ -7,4 +7,10 @@ public class InstCond {
 		this.ng = 1;
 		this.i = i;
 	}
+	
+	public String mostrar()
+	{
+		return i.mostrar();
+	}
+	
 }

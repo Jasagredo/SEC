@@ -9,4 +9,10 @@ public class Asig implements Inst {
 		this.id = i;
 		this.e = e;
 	}
+
+	public String mostrar() {
+		return id.mostrar() + " " + e.mostrar();
+	}
+	
+	
 }

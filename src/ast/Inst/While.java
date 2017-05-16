@@ -1,5 +1,6 @@
 package ast.Inst;
 
+import java.util.Iterator;
 import java.util.List;
 
 import ast.Expr.Expr;
@@ -11,5 +12,13 @@ public class While implements Inst{
 		super();
 		this.e = e;
 		this.cuerpo = cuerpo;
+	}
+	
+	public String mostrar()
+	{
+		Iterator<InstCond> it = cuerpo.iterator();
+		String s = "";
+		while (it.hasNext()) s = s + it.next().toString() + "\n";
+		return "while " + e.toString() + " " + s;
 	}
 }

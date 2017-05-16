@@ -1,6 +1,7 @@
 package ast.Expr;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Acceso extends Expr {
@@ -13,5 +14,17 @@ public class Acceso extends Expr {
 		for (int i = 1; i < arr.length-1; i++){
 			dim.add(Integer.parseInt(arr[i].substring(1, arr[i].length()-2)));
 		}
+	}
+	
+	public String mostrar()
+	{
+		Iterator<Integer> it = dim.iterator();
+		String s="";
+		while (it.hasNext()) {
+		 
+		s = s + "[" + it.next().toString() + "]";
+		 
+		}
+		return s;
 	}
 }
