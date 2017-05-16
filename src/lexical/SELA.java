@@ -11,7 +11,6 @@ public class SELA implements java_cup.runtime.Scanner {
 	private final int YY_F = -1;
 	private final int YY_NO_STATE = -1;
 	private final int YY_NOT_ACCEPT = 0;
-	@SuppressWarnings("unused")
 	private final int YY_START = 1;
 	private final int YY_END = 2;
 	private final int YY_NO_ANCHOR = 4;
@@ -31,8 +30,7 @@ public class SELA implements java_cup.runtime.Scanner {
         symbolFactory = sf;
     }
     private ComplexSymbolFactory symbolFactory;
-    @SuppressWarnings("unused")
-	private int csline,cscolumn;
+    private int csline,cscolumn;
     public Symbol symbol(String name, int code){
 	return symbolFactory.newSymbol(name, code,new Location(yyline+1,yychar+1-yylength()),new Location(yyline+1,yychar+1));
     }
@@ -80,13 +78,11 @@ public class SELA implements java_cup.runtime.Scanner {
   ops = new SELAOperations(this);
 	}
 
-	@SuppressWarnings("unused")
 	private boolean yy_eof_done = false;
 	private final int YYINITIAL = 0;
 	private final int yy_state_dtrans[] = {
 		0
 	};
-	@SuppressWarnings("unused")
 	private void yybegin (int state) {
 		yy_lexical_state = state;
 	}
@@ -188,7 +184,6 @@ public class SELA implements java_cup.runtime.Scanner {
 		return newbuf;
 	}
 	private final int YY_E_INTERNAL = 0;
-	@SuppressWarnings("unused")
 	private final int YY_E_MATCH = 1;
 	private java.lang.String yy_error_string[] = {
 		"Error: Internal error.\n",

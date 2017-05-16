@@ -27,7 +27,7 @@ public class SELAOperations {
 		return sec.symbol("|",SESASym.DIS, "|");     
 	}    
 	public Symbol unidadNegacion() {
-		return sec.symbol("Â¬",SESASym.NEG, "¬");     
+		return sec.symbol("Â¬",SESASym.NEG, "Â¬");     
 	}  
 	public Symbol unidadOperadorMas() {
 		return sec.symbol("+",SESASym.MAS, "+"); 
@@ -69,7 +69,7 @@ public class SELAOperations {
 		return sec.symbol(")",SESASym.PCI, ")"); 
 	} 
 	public Symbol unidadAsig() {
-		return sec.symbol("<··",SESASym.ASIG, "<··"); 
+		return sec.symbol("<Â·Â·",SESASym.ASIG, "<Â·Â·"); 
 	} 
 	public Symbol unidadFinInstruccion() {
 		return sec.symbol("!",SESASym.FININSTR, "!");     
@@ -78,7 +78,7 @@ public class SELAOperations {
 		return sec.symbol("si",SESASym.IF, "si"); 
 	} 
 	public Symbol unidadAperturaCondicional() {
-		return sec.symbol("¿",SESASym.APCON, "¿");     
+		return sec.symbol("Â¿",SESASym.APCON, "Â¿");     
 	} 
 	public Symbol unidadCierreCondicional() {
 		return sec.symbol("?",SESASym.CICON, "?");     
