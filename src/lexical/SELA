@@ -1,0 +1,133 @@
+package lexical;
+
+import java_cup.runtime.ComplexSymbolFactory;
+import java_cup.runtime.ComplexSymbolFactory.Location;
+import java_cup.runtime.Symbol;
+import java.lang.Error;
+import java.io.*;
+
+
+%%
+%class SELA
+%implements sym
+%line
+%cup
+%type  java_cup.runtime.Symbol
+%char
+%public
+%unicode
+
+%{
+  private SELAOperations ops;
+  private SELAErr errores;
+  public String lexema() {return yytext();}
+  public int fila() {return yyline+1;}
+  public int columna() {return yychar+1;}
+  public void fijaGestionErrores(SELAErr errores){
+	this.errores = errores;
+  }
+  public SELA(Reader r, ComplexSymbolFactory sf){
+	this(r);
+        symbolFactory = sf;
+    }
+    private ComplexSymbolFactory symbolFactory;
+    private int csline,cscolumn;
+    public Symbol symbol(String name, int code){
+	return symbolFactory.newSymbol(name, code,new Location(yyline+1,yychar+1-yylength()),new Location(yyline+1,yychar+1));
+    }
+    public Symbol symbol(String name, int code, String lexem){
+	return symbolFactory.newSymbol(name, code, new Location(yyline+1, yychar +1), new Location(yyline+1,yychar+yylength()), lexem);
+    }
+%}
+
+%eofval{
+	return ops.unidadEOF();
+%eofval}
+
+%init{
+  ops = new SELAOperations(this);
+%init}
+
+letra  = [A-Z]|[a-z]
+digito = [0-9]
+numeroEntero = [\+|-]?{digito}+
+blancos = [ \t|\r|\b|\n]
+separador = --
+igual = \=
+mayor = >
+menor = <
+conjuncion = &
+disyuncion = \|
+negacion = ¬
+operadorMas = \+
+operadorMenos = -
+operadorPor = \*
+operadorDivision = /
+logico = Log
+entero = Ent
+dimension = \[{digito}+\]
+true = true
+false = false
+bloque = bloque
+finbloque = finbloque
+parentesisApertura = \(
+parentesisCierre = \)
+asig = <··
+cons = cons
+finInstruccion  = !
+if = si
+aperturaCondicional = ¿
+cierreCondicional = \?
+entonces = entonces
+guionControl = ~
+sino = sino
+mientras = mientras
+simboloBucle = \.\.\.
+comentario = %[.]*
+accesoArray = (_{digito}+)
+identificadorV = {letra}({letra}|{digito})*
+aperturaAcceso = \{
+cierreAcceso = \}
+puntoycoma = \;
+%%
+
+{dimension}				  {return ops.unidadDimension();}
+{cons}				{return ops.unidadCons();}
+{aperturaAcceso}	{return ops.unidadApAcc();}
+{cierreAcceso}		{return ops.unidadCiAcc();}
+{puntoycoma}		{return ops.unidadPyC();}
+{separador}               {return ops.unidadSep();}
+{comentario}		  {}
+{blancos}				{}
+{numeroEntero}		  {return ops.unidadNumeroEntero();}
+{igual}                   {return ops.unidadIgual();}
+{mayor}                   {return ops.unidadMayor();}
+{menor}                   {return ops.unidadMenor();}
+{conjuncion}              {return ops.unidadConjuncion();}
+{disyuncion}              {return ops.unidadDisyuncion();}
+{negacion}                {return ops.unidadNegacion();}
+{operadorMas}             {return ops.unidadOperadorMas();}
+{operadorPor}             {return ops.unidadOperadorPor();}
+{operadorDivision}        {return ops.unidadOperadorDivision();}
+{logico}                  {return ops.unidadLogico();}
+{entero}                  {return ops.unidadEntero();}
+{true}                    {return ops.unidadTrue();}
+{false}                   {return ops.unidadFalse();}
+{bloque}                  {return ops.unidadBloque();}
+{finbloque}               {return ops.unidadFinBloque();}
+{parentesisApertura}      {return ops.unidadParentesisApertura();}
+{parentesisCierre}        {return ops.unidadParentesisCierre();}
+{asig}                    {return ops.unidadAsig();}
+{finInstruccion}          {return ops.unidadFinInstruccion();}
+{if}			  {return ops.unidadIf();}
+{aperturaCondicional}	  {return ops.unidadAperturaCondicional();}
+{cierreCondicional}  	  {return ops.unidadCierreCondicional();}
+{entonces}		  {return ops.unidadEntonces();}
+{guionControl}		  {return ops.unidadGuionControl();}
+{sino}			  {return ops.unidadSino();}
+{mientras}		  {return ops.unidadMientras();}
+{simboloBucle}	          {return ops.unidadSimboloBucle();}
+{accesoArray}	          {return ops.unidadAccesoArray();}
+{identificadorV}          {return ops.unidadIdV();}
+{operadorMenos}           {return ops.unidadOperadorMenos();}
+.                       {errores.errorLexico(fila(), lexema());}

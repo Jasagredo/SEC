@@ -1,0 +1,118 @@
+package syntactical;
+
+import lexical.SELA;
+import lexical.SELAErr;
+import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
+
+scan with {: 
+	return getScanner().next_token(); 
+:};
+parser code {: 
+   private SELAErr errores;
+   public void syntax_error(ComplexSymbol unidadLexica) {
+     errores.errorSintactico(unidadLexica);
+   }
+:};
+
+init with {: 
+   errores = new SELAErr();
+   SELA alex = (SELA)getScanner();
+   alex.fijaGestionErrores(errores);
+:};
+
+
+terminal     NUMENT, CONS,
+			 MAS, MENOS, POR, DIV, IGUAL, MAYOR, MENOR, CON, DIS, NEG, 
+			 LOG, ENT, 
+			 TRUE, FALSE,
+			 BLOQUE, FBLOQUE, IDV, SEP,
+			 PAP, PCI, ASIG, FININSTR,
+			 IF, APCON, CICON, ENTONCES, SINO,
+			 MIENTRAS, SBUCLE,
+			 GCONTROL,
+			 ACCESO, APACCESO, CIACCESO, DIM, PYC;
+
+non terminal  Programa, ListaDec, ListaInstr, ListaInstrCond, Dec, Tipo, TipoC, Base, BaseE,
+			  BaseL, DecArray, NumPYC, Instr, Var, OPC, OPL, Exp, OPE, InstrCond;
+			  
+precedence left IGUAL;
+precedence left MENOR, MAYOR;
+precedence left MAS, MENOS;
+precedence left DIS, CON;
+precedence left POR, DIV;
+precedence left SINO;
+precedence left GCONTROL;
+
+start with Programa;
+
+Programa  ::=  BLOQUE ListaDec SEP ListaInstr FBLOQUE
+    ;
+ListaDec  ::=  Dec ListaDec
+	| CONS Dec ListaDec
+    |
+    ;
+ListaInstr  ::= ListaInstr Instr
+    | 
+    ;
+ListaInstrCond ::= ListaInstrCond InstrCond
+	|
+	;
+Dec ::= Tipo IDV FININSTR 
+	| Tipo IDV ASIG Base FININSTR
+	| TipoC IDV FININSTR
+	| TipoC IDV ASIG DecArray FININSTR
+    ;
+Tipo ::= ENT
+	| LOG
+	;
+TipoC ::= Tipo DIM 
+	| TipoC DIM
+	;
+Base ::= BaseE
+	| BaseL
+	| IDV
+	;
+BaseE ::= NUMENT
+	;
+BaseL ::= TRUE 
+	| FALSE
+	;
+DecArray ::= APACCESO NumPYC CIACCESO
+	;
+NumPYC ::= NumPYC PYC BaseE 
+	| BaseE
+	;
+Instr ::= FININSTR
+    | Programa
+    | Var ASIG Exp FININSTR
+    | IF APCON Exp CICON ENTONCES ListaInstrCond
+    | IF APCON Exp CICON ENTONCES ListaInstrCond SINO ListaInstrCond
+    | MIENTRAS APCON Exp CICON SBUCLE ListaInstrCond
+    ;
+InstrCond ::= GCONTROL Instr
+	| GCONTROL InstrCond
+	;
+Var ::= IDV
+	| ACCESO
+	;
+Exp ::= BaseE
+	| BaseL
+	| Var
+    | PAP Exp PCI
+    | Exp:e1 OPC Exp:e2
+    | NEG Exp
+    | Exp:e1 OPL Exp:e2
+    | Exp:e1 OPE Exp: e2
+    ;
+OPC ::= MAYOR
+	| MENOR
+	| IGUAL
+	;
+OPL ::= CON
+	| DIS
+	;
+OPE ::= MAS
+	| MENOS
+	| POR
+	| DIV
+	;
