@@ -3,6 +3,11 @@ package syntactical;
 import lexical.SELA;
 import lexical.SELAErr;
 import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
+import ast.Dec.*;
+import ast.Expr.*;
+import ast.Inst.*;
+import java.util.List;
+import java.util.ArrayList;
 
 scan with {: 
 	return getScanner().next_token(); 
@@ -21,98 +26,112 @@ init with {:
 :};
 
 
-terminal     NUMENT, CONS,
-			 MAS, MENOS, POR, DIV, IGUAL, MAYOR, MENOR, CON, DIS, NEG, 
-			 LOG, ENT, 
-			 TRUE, FALSE,
-			 BLOQUE, FBLOQUE, IDV, SEP,
+terminal     CONS,  
+			 BLOQUE, FBLOQUE, SEP,
 			 PAP, PCI, ASIG, FININSTR,
 			 IF, APCON, CICON, ENTONCES, SINO,
 			 MIENTRAS, SBUCLE,
 			 GCONTROL,
-			 ACCESO, APACCESO, CIACCESO, DIM, PYC;
+			 APACCESO, CIACCESO, PYC;
+terminal Tipo LOG, ENT;
+terminal Operadores MAS, MENOS, POR, DIV, IGUAL, MAYOR, MENOR, CON, DIS, NEG;
+terminal String ACCESO, IDV, DIM;
+terminal int NUMENT;
+terminal boolean TRUE, FALSE;
 
-non terminal  Programa, ListaDec, ListaInstr, ListaInstrCond, Dec, Tipo, TipoC, Base, BaseE,
-			  BaseL, DecArray, NumPYC, Instr, Var, OPC, OPL, Exp, OPE, InstrCond;
+non terminal Block Programa;
+non terminal List<Dec> ListaDec;
+non terminal List<Inst> ListaInstr;
+non terminal List<InstCond> ListaInstrCond;
+non terminal Dec Dec;
+non terminal Tipo Tipo;
+non terminal TipoC TipoC;
+non terminal Expr Base;
+non terminal NumConst BaseE;
+non terminal BoolConst BaseL;
+non terminal List<Base> DecArray;
+non terminal List<Base> NumPYC;
+non terminal Inst Instr;
+non terminal Expr Var;
+non terminal Operadores OPC;
+non terminal Expr Exp;
+non terminal InstCond InstrCond;
 			  
 precedence left IGUAL;
 precedence left MENOR, MAYOR;
 precedence left MAS, MENOS;
-precedence left DIS, CON;
+precedence left DIS;
+precedence left CON;
 precedence left POR, DIV;
 precedence left SINO;
 precedence left GCONTROL;
 
 start with Programa;
 
-Programa  ::=  BLOQUE ListaDec SEP ListaInstr FBLOQUE
+Programa  ::=  BLOQUE ListaDec:ld SEP ListaInstr:li FBLOQUE 	{: RESULT = new Block(ld, li); :}
     ;
-ListaDec  ::=  Dec ListaDec
-	| CONS Dec ListaDec
-    |
+ListaDec  ::=  Dec:d ListaDec:ld 								{: ld.add(d); RESULT = ld; :}
+	| CONS Dec:d ListaDec:ld									{: d.cons = true; ld.add(d); RESULT = ld; :}
+    |															{: RESULT = new ArrayList<Dec>(); :}
     ;
-ListaInstr  ::= ListaInstr Instr
-    | 
+ListaInstr  ::= ListaInstr:li Instr:i							{: li.add(i); RESULT = li; :}
+    | 															{: RESULT = new ArrayList<Inst>(); :}
     ;
-ListaInstrCond ::= ListaInstrCond InstrCond
-	|
+ListaInstrCond ::= ListaInstrCond:lic InstrCond	:ic				{: lic.add(ic); RESULT = lic; :}
+	|															{: RESULT = new ArrayList<InstCond>(); :}
 	;
-Dec ::= Tipo IDV FININSTR 
-	| Tipo IDV ASIG Base FININSTR
-	| TipoC IDV FININSTR
-	| TipoC IDV ASIG DecArray FININSTR
+Dec ::= Tipo:t IDV:i FININSTR 									{: RESULT = new Dec(t, new Id(i), null); :}
+	| Tipo:t IDV:i ASIG Base:b FININSTR							{: RESULT = new Dec(t, new Id(i), b); :}
+	| TipoC:t IDV:i FININSTR									{: RESULT = new Dec(t, new Id(i), null); :}
+	| TipoC:t IDV:i ASIG DecArray:da FININSTR					{: RESULT = new Dec(t, new Id(i), da); :}
     ;
-Tipo ::= ENT
-	| LOG
+Tipo ::= ENT													{: RESULT = Tipo.ENT; :}
+	| LOG														{: RESULT = Tipo.LOG; :}
 	;
-TipoC ::= Tipo DIM 
-	| TipoC DIM
+TipoC ::= Tipo:t DIM:d 											{: RESULT = new TipoC(t, d); :}
+	| TipoC:t DIM:dim											{: t.d.add(Integer.parseInt(dim.substring(0, dim.length()-2))); RESULT = t; :}
 	;
-Base ::= BaseE
-	| BaseL
-	| IDV
+Base ::= BaseE:b												{: RESULT = b; :}
+	| BaseL:l													{: RESULT = l; :}
+	| IDV:i														{: RESULT = new Id(i); :}
 	;
-BaseE ::= NUMENT
+BaseE ::= NUMENT:n												{: RESULT = new NumConst(n); :}
 	;
-BaseL ::= TRUE 
-	| FALSE
+BaseL ::= TRUE													{: RESULT = new BoolConst(true); :}
+	| FALSE														{: RESULT = new BoolConst(false); :}
 	;
-DecArray ::= APACCESO NumPYC CIACCESO
+DecArray ::= APACCESO NumPYC:n CIACCESO							{: RESULT = n; :}
 	;
-NumPYC ::= NumPYC PYC BaseE 
-	| BaseE
+NumPYC ::= NumPYC:n PYC Base:b									{: n.add((Base)b); RESULT = n; :}									
+	| Base:b													{: List<Base> np = new ArrayList<Base>(); np.add((Base)b); RESULT = np; :}
 	;
-Instr ::= FININSTR
-    | Programa
-    | Var ASIG Exp FININSTR
-    | IF APCON Exp CICON ENTONCES ListaInstrCond
-    | IF APCON Exp CICON ENTONCES ListaInstrCond SINO ListaInstrCond
-    | MIENTRAS APCON Exp CICON SBUCLE ListaInstrCond
+Instr ::= FININSTR												{: RESULT = new Vacia(); :}
+    | Programa:p												{: RESULT = p; :}
+    | Exp:s ASIG Exp:e FININSTR									{: RESULT = new Asig(s,e); :}
+    | IF APCON Exp:e CICON ENTONCES ListaInstrCond:l			{: RESULT = new Ifthen(e, l); :}
+    | IF APCON Exp:e CICON ENTONCES ListaInstrCond:l SINO ListaInstrCond:m {: RESULT = new IfThenElse(e, l, m); :}
+    | MIENTRAS APCON Exp:e CICON SBUCLE ListaInstrCond:l		{: RESULT = new While(e, l); :}
     ;
-InstrCond ::= GCONTROL Instr
-	| GCONTROL InstrCond
+InstrCond ::= GCONTROL Instr:i									{: RESULT = new InstCond(i); :}
+	| GCONTROL InstrCond:i										{: i.ng = i.ng+1; RESULT = i; :}
 	;
-Var ::= IDV
-	| ACCESO
+Var ::= IDV:i													{: RESULT = new Id(i); :}
+	| ACCESO:a													{: RESULT = new Acceso(a); :}
 	;
-Exp ::= BaseE
-	| BaseL
-	| Var
-    | PAP Exp PCI
-    | Exp:e1 OPC Exp:e2
-    | NEG Exp
-    | Exp:e1 OPL Exp:e2
-    | Exp:e1 OPE Exp: e2
+Exp ::= BaseE:b													{: RESULT = b; :}
+	| BaseL:l													{: RESULT = l; :}
+	| Var:v														{: RESULT = v; :}
+    | PAP Exp:e PCI												{: RESULT = e; :}
+    | Exp:e1 OPC:o Exp:e2										{: RESULT = new Expr(o, e1, e2); :}
+    | NEG Exp:e													{: RESULT = new Expr(Operadores.NEG, null, e); :}
     ;
-OPC ::= MAYOR
-	| MENOR
-	| IGUAL
-	;
-OPL ::= CON
+OPC ::= MAYOR													{: RESULT = Operadores.MAYOR; :}
+	| MENOR														{: RESULT = Operadores.MENOR; :}
+	| IGUAL														{: RESULT = Operadores.IGUAL; :}
+	| CON														{: RESULT = Operadores.CON; :}
 	| DIS
-	;
-OPE ::= MAS
-	| MENOS
-	| POR
-	| DIV
+	| MAS														{: RESULT = Operadores.MAS; :}
+	| MENOS														{: RESULT = Operadores.MENOS; :}
+	| POR														{: RESULT = Operadores.POR; :}
+	| DIV														{: RESULT = Operadores.DIV; :}
 	;

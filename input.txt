@@ -4,7 +4,7 @@ Ent e2 <·· 3!
 Log l1 <·· true!
 --
 si ¿(l1 & l2)? entonces
-~ l1 <·· ¬false!
+~ l1 <·· 2+ 3!
 sino
 ~ si ¿l3? entonces
 ~ ~ l1 <·· true!

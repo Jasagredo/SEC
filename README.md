@@ -1,5 +1,5 @@
 # SEC
-SaGala Effective Compiles
+SaGala Effective Compiler
 
 Modules:
 - SELA : SaGala Effective Lexical Analizer (generated with [JLex](https://www.cs.princeton.edu/~appel/modern/java/JLex/))

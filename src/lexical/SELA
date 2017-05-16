@@ -50,7 +50,7 @@ import java.io.*;
 
 letra  = [A-Z]|[a-z]
 digito = [0-9]
-numeroEntero = [\+|-]?{digito}+
+numeroEntero = [-]?{digito}+
 blancos = [ \t|\r|\b|\n]
 separador = --
 igual = \=
