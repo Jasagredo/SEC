@@ -228,7 +228,8 @@ public class SESA extends java_cup.runtime.lr_parser {
     }
 
   /** Invoke a user supplied parse action. */
-  public java_cup.runtime.Symbol do_action(
+  @SuppressWarnings("rawtypes")
+public java_cup.runtime.Symbol do_action(
     int                        act_num,
     java_cup.runtime.lr_parser parser,
     java.util.Stack            stack,
@@ -288,7 +289,8 @@ class CUP$parser$actions {
   }
 
   /** Method 0 with the actual generated action code for actions 0 to 300. */
-  public final java_cup.runtime.Symbol CUP$parser$do_action_part00000000(
+  @SuppressWarnings({ "rawtypes", "unused" })
+public final java_cup.runtime.Symbol CUP$parser$do_action_part00000000(
     int                        CUP$parser$act_num,
     java_cup.runtime.lr_parser CUP$parser$parser,
     java.util.Stack            CUP$parser$stack,
@@ -810,7 +812,8 @@ class CUP$parser$actions {
     } /* end of method */
 
   /** Method splitting the generated action code into several parts. */
-  public final java_cup.runtime.Symbol CUP$parser$do_action(
+  @SuppressWarnings("rawtypes")
+public final java_cup.runtime.Symbol CUP$parser$do_action(
     int                        CUP$parser$act_num,
     java_cup.runtime.lr_parser CUP$parser$parser,
     java.util.Stack            CUP$parser$stack,

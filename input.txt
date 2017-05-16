@@ -1,11 +1,11 @@
 bloque
 Ent e1!
-Ent e2 <Â·Â· 3!
-Log l1 <Â·Â· true!
+Ent e2 <·· 3!
+Log l1 <·· true!
 --
-si Â¿(l1 & l2)? entonces
-~ l1 <Â·Â· Â¬false!
+si ¿(l1 & l2)? entonces
+~ l1 <·· ¬false!
 sino
-~ ~ si Â¿l3? entonces
-~ ~ l1 <Â·Â· true!
+~ ~ si ¿l3? entonces
+~ ~ l1 <·· true!
 finbloque

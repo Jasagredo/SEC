@@ -1,7 +1,6 @@
 package lexical;
 
 import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
-import java_cup.runtime.Symbol;
 
 public class SELAErr {
    public void errorLexico(int fila, String lexema) {
