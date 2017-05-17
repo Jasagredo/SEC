@@ -15,7 +15,7 @@ public class Main {
      Reader input = new InputStreamReader(new FileInputStream("input.txt"));
 	 SELA sela = new SELA(input, new ComplexSymbolFactory());
 	 parser asint = new parser(sela, new ComplexSymbolFactory());
-	 Symbol s = asint.parse();
+	 Symbol s = asint.debug_parse();
 	 System.out.println((Block) (s.value));
  }
 }

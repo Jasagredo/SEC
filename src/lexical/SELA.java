@@ -11,7 +11,6 @@ public class SELA implements java_cup.runtime.Scanner {
 	private final int YY_F = -1;
 	private final int YY_NO_STATE = -1;
 	private final int YY_NOT_ACCEPT = 0;
-	@SuppressWarnings("unused")
 	private final int YY_START = 1;
 	private final int YY_END = 2;
 	private final int YY_NO_ANCHOR = 4;
@@ -31,8 +30,7 @@ public class SELA implements java_cup.runtime.Scanner {
         symbolFactory = sf;
     }
     private ComplexSymbolFactory symbolFactory;
-    @SuppressWarnings("unused")
-	private int csline,cscolumn;
+    private int csline,cscolumn;
     public Symbol symbol(String name, int code){
 	return symbolFactory.newSymbol(name, code,new Location(yyline+1,yychar+1-yylength()),new Location(yyline+1,yychar+1));
     }
@@ -80,13 +78,11 @@ public class SELA implements java_cup.runtime.Scanner {
   ops = new SELAOperations(this);
 	}
 
-	@SuppressWarnings("unused")
 	private boolean yy_eof_done = false;
 	private final int YYINITIAL = 0;
 	private final int yy_state_dtrans[] = {
 		0
 	};
-	@SuppressWarnings("unused")
 	private void yybegin (int state) {
 		yy_lexical_state = state;
 	}
@@ -188,7 +184,6 @@ public class SELA implements java_cup.runtime.Scanner {
 		return newbuf;
 	}
 	private final int YY_E_INTERNAL = 0;
-	@SuppressWarnings("unused")
 	private final int YY_E_MATCH = 1;
 	private java.lang.String yy_error_string[] = {
 		"Error: Internal error.\n",
@@ -280,8 +275,8 @@ public class SELA implements java_cup.runtime.Scanner {
 		/* 38 */ YY_NO_ANCHOR,
 		/* 39 */ YY_NO_ANCHOR,
 		/* 40 */ YY_NO_ANCHOR,
-		/* 41 */ YY_NOT_ACCEPT,
-		/* 42 */ YY_NO_ANCHOR,
+		/* 41 */ YY_NO_ANCHOR,
+		/* 42 */ YY_NOT_ACCEPT,
 		/* 43 */ YY_NO_ANCHOR,
 		/* 44 */ YY_NO_ANCHOR,
 		/* 45 */ YY_NOT_ACCEPT,
@@ -292,12 +287,12 @@ public class SELA implements java_cup.runtime.Scanner {
 		/* 50 */ YY_NO_ANCHOR,
 		/* 51 */ YY_NOT_ACCEPT,
 		/* 52 */ YY_NO_ANCHOR,
-		/* 53 */ YY_NOT_ACCEPT,
-		/* 54 */ YY_NO_ANCHOR,
+		/* 53 */ YY_NO_ANCHOR,
+		/* 54 */ YY_NOT_ACCEPT,
 		/* 55 */ YY_NO_ANCHOR,
-		/* 56 */ YY_NO_ANCHOR,
+		/* 56 */ YY_NOT_ACCEPT,
 		/* 57 */ YY_NO_ANCHOR,
-		/* 58 */ YY_NO_ANCHOR,
+		/* 58 */ YY_NOT_ACCEPT,
 		/* 59 */ YY_NO_ANCHOR,
 		/* 60 */ YY_NO_ANCHOR,
 		/* 61 */ YY_NO_ANCHOR,
@@ -330,56 +325,75 @@ public class SELA implements java_cup.runtime.Scanner {
 		/* 88 */ YY_NO_ANCHOR,
 		/* 89 */ YY_NO_ANCHOR,
 		/* 90 */ YY_NO_ANCHOR,
-		/* 91 */ YY_NO_ANCHOR
+		/* 91 */ YY_NO_ANCHOR,
+		/* 92 */ YY_NO_ANCHOR,
+		/* 93 */ YY_NO_ANCHOR,
+		/* 94 */ YY_NO_ANCHOR,
+		/* 95 */ YY_NO_ANCHOR,
+		/* 96 */ YY_NO_ANCHOR,
+		/* 97 */ YY_NO_ANCHOR,
+		/* 98 */ YY_NO_ANCHOR,
+		/* 99 */ YY_NO_ANCHOR,
+		/* 100 */ YY_NO_ANCHOR,
+		/* 101 */ YY_NO_ANCHOR,
+		/* 102 */ YY_NO_ANCHOR
 	};
 	private int yy_cmap[] = unpackFromString(1,65538,
-"48:8,14:3,48:2,14,48:18,14,40,48:3,12,20,48,37,38,22,15,48,11,13,23,2:10,48" +
-",10,19,17,18,42,48,46:4,26,46:6,24,46:14,1,48,3,48,45,48,32,34,4,47,30,31,2" +
-"5,47,36,47:2,33,44,6,5,47,35,28,7,27,29,47:5,8,16,9,43,48:45,21,48:10,39,48" +
-":7,41,48:65344,0:2")[0];
+"47:8,14:3,47:2,14,47:18,14,40,47:3,12,18,47,37,38,22,21,47,11,13,23,2:10,47" +
+",10,17,15,16,42,47,45:4,26,45:6,24,45:14,1,47,3,47,44,47,32,34,4,46,30,31,2" +
+"5,46,36,46:2,33,43,6,5,46,35,28,7,27,29,46:5,8,14,9,47:46,20,47:10,39,47:7," +
+"41,47:2,19,47:65341,0:2")[0];
 
-	private int yy_rmap[] = unpackFromString(1,92,
-"0,1,2,3,4,1:3,5,6,1,3,1:2,7,1:10,8,1,9,1:5,10:8,11,1,12,3,13,14,15,16,9,17," +
-"18,1,19,20,21,22,23,24,25,26,27,28,10,29,30,31,32,33,34,35,36,37,38,39,40,4" +
-"1,42,43,44,45,46,47,48,10,49,50,51,52,53,54,55")[0];
+	private int yy_rmap[] = unpackFromString(1,103,
+"0,1,2,3,4,1:3,5,6,1:3,7,1:8,8,1:3,9,1:4,10:4,1,10:6,11,1,12,13,14,15,16,17," +
+"18,19,9,1,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,10,35,36,37,38,39,40" +
+",41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,10,57,58,59,60,61,62,63,64" +
+",65,66")[0];
 
-	private int yy_nxt[][] = unpackFromString(56,49,
-"1,2,3,42,4,84:2,43,5,6,7,8,9,46,10,11,44,12,13,14,15,16,17,18,47,84,50,87,8" +
-"4:2,88,89,84:2,90,84:2,19,20,42,21,22,23,24,91,49,52,84,42,-1:51,41,-1:48,3" +
-",-1:48,84,-1,84,62,84:2,-1:16,63,84,63,84:10,-1:7,84,-1,63,84,-1:3,3,-1:8,2" +
-"6,-1:50,9,-1:74,48,-1:11,84,-1,84:2,55,84,-1:16,63,84,63,84:10,-1:7,84,-1,6" +
-"3,84,-1:3,27,-1:48,84,-1,84:4,-1:16,63,84,63,84:10,-1:7,84,-1,63,84,-1:3,41" +
-",28,-1:47,84,-1,84:4,-1:16,63,84,63,84:9,25,-1:7,84,-1,63,84,-1:14,29,-1:48" +
-",45,-1:40,51,-1:82,30,-1:15,53,-1:67,31,-1:50,32,-1:23,84,-1,84:3,33,-1:16," +
-"63,84,63,84:10,-1:7,84,-1,63,84,-1:3,84,-1,84,34,84:2,-1:16,63,84,63,84:10," +
-"-1:7,84,-1,63,84,-1:3,84,-1,84:4,-1:16,63,84,63,84:3,35,84:6,-1:7,84,-1,63," +
-"84,-1:3,84,-1,84:4,-1:16,63,84,63,84:3,36,84:6,-1:7,84,-1,63,84,-1:3,84,-1," +
-"84:4,-1:16,63,84,63,84:3,37,84:6,-1:7,84,-1,63,84,-1:3,84,-1,84:3,38,-1:16," +
-"63,84,63,84:10,-1:7,84,-1,63,84,-1:3,84,-1,84:3,39,-1:16,63,84,63,84:10,-1:" +
-"7,84,-1,63,84,-1:3,84,-1,84:4,-1:16,63,84,63,84:3,40,84:6,-1:7,84,-1,63,84," +
-"-1:3,84,-1,84:2,54,84,-1:16,63,84,63,84:10,-1:7,84,-1,63,84,-1:3,84,-1,84:4" +
-",-1:16,63,84,63,84:2,56,84:7,-1:7,84,-1,63,84,-1:3,84,-1,84:4,-1:16,63,84,6" +
-"3,85,84:9,-1:7,84,-1,63,84,-1:3,84,-1,84:4,-1:16,63,84,63,84:6,70,84:3,-1:7" +
-",84,-1,63,84,-1:3,84,-1,84:2,71,84,-1:16,63,84,63,84:10,-1:7,84,-1,63,84,-1" +
-":3,84,-1,84,72,84:2,-1:16,63,84,63,84:10,-1:7,84,-1,63,84,-1:3,84,-1,84:4,-" +
-"1:16,63,84,63,84:3,73,84:6,-1:7,84,-1,63,84,-1:3,84,-1,84:3,57,-1:16,63,84," +
-"63,84:10,-1:7,84,-1,63,84,-1:3,84,-1,84:4,-1:16,63,84,63,84:7,74,84:2,-1:7," +
-"84,-1,63,84,-1:3,84,-1,84:4,-1:16,63,84,63,84:8,75,84,-1:7,84,-1,63,84,-1:3" +
-",84,-1,84:2,76,84,-1:16,63,84,63,84:10,-1:7,84,-1,63,84,-1:3,84,-1,84:4,-1:" +
-"16,63,84,63,84:6,78,84:3,-1:7,84,-1,63,84,-1:3,84,-1,84:4,-1:16,63,84,63,84" +
-":2,58,84:7,-1:7,84,-1,63,84,-1:3,84,-1,84:4,-1:16,63,84,63,79,84:9,-1:7,84," +
-"-1,63,84,-1:3,84,-1,80,84:3,-1:16,63,84,63,84:10,-1:7,84,-1,63,84,-1:3,84,-" +
-"1,84,81,84:2,-1:16,63,84,63,84:10,-1:7,84,-1,63,84,-1:3,84,-1,84:4,-1:16,63" +
-",84,63,84,82,84:8,-1:7,84,-1,63,84,-1:3,84,-1,84:4,-1:16,63,84,63,84:3,59,8" +
-"4:6,-1:7,84,-1,63,84,-1:3,84,-1,84:4,-1:16,63,84,63,84:8,83,84,-1:7,84,-1,6" +
-"3,84,-1:3,84,-1,84:4,-1:16,63,84,63,84:5,60,84:4,-1:7,84,-1,63,84,-1:3,84,-" +
-"1,84:4,-1:16,63,84,63,84:2,61,84:7,-1:7,84,-1,63,84,-1:3,84,-1,84,86,84:2,-" +
-"1:16,63,84,63,84:10,-1:7,84,-1,63,84,-1:3,84,-1,84:2,77,84,-1:16,63,84,63,8" +
-"4:10,-1:7,84,-1,63,84,-1:3,84,-1,84:4,-1:16,63,84,63,84,64,84:8,-1:7,84,-1," +
-"63,84,-1:3,84,-1,84:2,65,84,-1:16,63,84,63,84:10,-1:7,84,-1,63,84,-1:3,84,-" +
-"1,84:4,-1:16,63,84,63,84:5,66,84:3,67,-1:7,84,-1,63,84,-1:3,84,-1,84:4,-1:1" +
-"6,63,84,63,84:6,68,84:3,-1:7,84,-1,63,84,-1:3,84,-1,84:4,-1:16,63,84,63,84:" +
-"9,69,-1:7,84,-1,63,84,-1");
+	private int yy_nxt[][] = unpackFromString(67,48,
+"1,2,3,43,4,92:2,44,5,6,7,8,9,46,10,11,12,13,14,49,43,15,16,17,47,92,50,96,9" +
+"2:2,97,67,92:2,98,92:2,18,19,43,20,43,21,99,52,53,92,43,-1:50,42,-1:47,3,-1" +
+":47,92,-1,92,68,92:2,-1:16,69,92,69,92:10,-1:6,92,-1,69,92,-1:3,3,-1:8,23,-" +
+"1:49,9,-1:53,48,-1:30,92,-1,92:2,59,92,-1:16,69,92,69,92:10,-1:6,92,-1,69,9" +
+"2,-1:3,26,-1:47,92,-1,92:4,-1:16,69,92,69,92:10,-1:6,92,-1,69,92,-1:3,42,27" +
+",-1:46,92,-1,92:4,-1:16,69,92,69,92:9,22,-1:6,92,-1,69,92,-1:14,28,-1:47,45" +
+",-1:39,51,-1:81,56,-1:28,24,-1:20,25,-1:12,54,-1:66,29,-1:49,30,-1:22,92,-1" +
+",92:4,-1:16,69,92,69,92:9,31,-1:6,92,-1,69,92,-1:20,58,-1:30,92,-1,92:3,32," +
+"-1:16,69,92,69,92:10,-1:6,92,-1,69,92,-1:40,35,-1:10,92,-1,92,33,92:2,-1:16" +
+",69,92,69,92:10,-1:6,92,-1,69,92,-1:3,92,-1,92:4,-1:16,69,92,69,92:3,34,92:" +
+"6,-1:6,92,-1,69,92,-1:3,92,-1,92:4,-1:16,69,92,69,92:3,36,92:6,-1:6,92,-1,6" +
+"9,92,-1:3,92,-1,92:4,-1:16,69,92,69,92:3,37,92:6,-1:6,92,-1,69,92,-1:3,92,-" +
+"1,92:3,38,-1:16,69,92,69,92:10,-1:6,92,-1,69,92,-1:3,92,-1,92:3,39,-1:16,69" +
+",92,69,92:10,-1:6,92,-1,69,92,-1:3,92,-1,92:4,-1:16,69,92,69,92:3,40,92:6,-" +
+"1:6,92,-1,69,92,-1:3,92,-1,92:3,41,-1:16,69,92,69,92:10,-1:6,92,-1,69,92,-1" +
+":3,92,-1,92:3,55,-1:16,69,92,69,92:5,72,92:3,73,-1:6,74,-1,69,92,-1:3,92,-1" +
+",92:2,57,92,-1:16,69,92,69,92:10,-1:6,92,-1,69,92,-1:3,92,-1,92:4,-1:16,69," +
+"92,69,92:2,60,92:7,-1:6,92,-1,69,92,-1:3,92,-1,92:4,-1:16,69,92,69,93,92:9," +
+"-1:6,92,-1,69,92,-1:3,92,-1,92:4,-1:16,69,92,69,92:6,77,92:3,-1:6,92,-1,69," +
+"92,-1:3,92,-1,92:2,78,92,-1:16,69,92,69,92:10,-1:6,92,-1,69,92,-1:3,92,-1,9" +
+"2:4,-1:16,69,92,69,92:9,102,-1:6,92,-1,69,92,-1:3,92,-1,92,79,92:2,-1:16,69" +
+",92,69,92:10,-1:6,92,-1,69,92,-1:3,92,-1,92:4,-1:16,69,92,69,92:3,80,92:6,-" +
+"1:6,92,-1,69,92,-1:3,92,-1,92:3,61,-1:16,69,92,69,92:10,-1:6,92,-1,69,92,-1" +
+":3,92,-1,92:4,-1:16,69,92,69,92:7,81,92:2,-1:6,92,-1,69,92,-1:3,92,-1,92:4," +
+"-1:16,69,92,69,92:8,82,92,-1:6,92,-1,69,92,-1:3,92,-1,92:2,83,92,-1:16,69,9" +
+"2,69,92:10,-1:6,92,-1,69,92,-1:3,92,-1,92:4,-1:16,69,92,69,92:6,85,92:3,-1:" +
+"6,92,-1,69,92,-1:3,92,-1,92:4,-1:16,69,92,69,92:2,62,92:7,-1:6,92,-1,69,92," +
+"-1:3,92,-1,92:4,-1:16,69,92,69,86,92:9,-1:6,92,-1,69,92,-1:3,92,-1,87,92:3," +
+"-1:16,69,92,69,92:10,-1:6,92,-1,69,92,-1:3,92,-1,92,88,92:2,-1:16,69,92,69," +
+"92:10,-1:6,92,-1,69,92,-1:3,92,-1,92:4,-1:16,69,92,69,92,89,92:8,-1:6,92,-1" +
+",69,92,-1:3,92,-1,92:4,-1:16,69,92,69,92:3,63,92:6,-1:6,92,-1,69,92,-1:3,92" +
+",-1,92:4,-1:16,69,92,69,92:8,90,92,-1:6,92,-1,69,92,-1:3,92,-1,92:4,-1:16,6" +
+"9,92,69,92:5,64,92:4,-1:6,92,-1,69,92,-1:3,92,-1,92:4,-1:16,69,92,69,92:2,6" +
+"5,92:7,-1:6,92,-1,69,92,-1:3,92,-1,92:4,-1:16,69,92,69,92:5,66,92:4,-1:6,92" +
+",-1,69,92,-1:3,92,-1,92,94,92:2,-1:16,69,92,69,92:10,-1:6,92,-1,69,92,-1:3," +
+"92,-1,92:2,84,92,-1:16,69,92,69,92:10,-1:6,92,-1,69,92,-1:3,92,-1,92:4,-1:1" +
+"6,69,92,69,92,91,92:8,-1:6,92,-1,69,92,-1:3,92,-1,92:4,-1:16,69,92,69,92,70" +
+",92:8,-1:6,92,-1,69,92,-1:3,92,-1,92:2,71,92,-1:16,69,92,69,92:10,-1:6,92,-" +
+"1,69,92,-1:3,92,-1,92:4,-1:16,69,92,69,92:6,75,92:3,-1:6,92,-1,69,92,-1:3,9" +
+"2,-1,92:4,-1:16,69,92,69,92:9,76,-1:6,92,-1,69,92,-1:3,92,-1,92:4,-1:16,69," +
+"92,69,95,92:9,-1:6,92,-1,69,92,-1:3,92,-1,92:2,100,92,-1:16,69,92,69,92:10," +
+"-1:6,92,-1,69,92,-1:3,92,-1,92:4,-1:16,69,92,69,92:3,101,92:6,-1:6,92,-1,69" +
+",92,-1");
 
 	public java_cup.runtime.Symbol next_token ()
 		throws java.io.IOException {
@@ -467,103 +481,103 @@ public class SELA implements java_cup.runtime.Scanner {
 					case -11:
 						break;
 					case 11:
-						{return ops.unidadOperadorMas();}
+						{return ops.unidadIgual();}
 					case -12:
 						break;
 					case 12:
-						{return ops.unidadIgual();}
+						{return ops.unidadMayor();}
 					case -13:
 						break;
 					case 13:
-						{return ops.unidadMayor();}
+						{return ops.unidadMenor();}
 					case -14:
 						break;
 					case 14:
-						{return ops.unidadMenor();}
+						{return ops.unidadConjuncion();}
 					case -15:
 						break;
 					case 15:
-						{return ops.unidadConjuncion();}
+						{return ops.unidadOperadorMas();}
 					case -16:
 						break;
 					case 16:
-						{return ops.unidadNegacion();}
+						{return ops.unidadOperadorPor();}
 					case -17:
 						break;
 					case 17:
-						{return ops.unidadOperadorPor();}
+						{return ops.unidadOperadorDivision();}
 					case -18:
 						break;
 					case 18:
-						{return ops.unidadOperadorDivision();}
+						{return ops.unidadParentesisApertura();}
 					case -19:
 						break;
 					case 19:
-						{return ops.unidadParentesisApertura();}
+						{return ops.unidadParentesisCierre();}
 					case -20:
 						break;
 					case 20:
-						{return ops.unidadParentesisCierre();}
+						{return ops.unidadFinInstruccion();}
 					case -21:
 						break;
 					case 21:
-						{return ops.unidadFinInstruccion();}
+						{return ops.unidadCierreCondicional();}
 					case -22:
 						break;
 					case 22:
-						{return ops.unidadAperturaCondicional();}
+						{return ops.unidadIf();}
 					case -23:
 						break;
 					case 23:
-						{return ops.unidadCierreCondicional();}
+						{return ops.unidadSep();}
 					case -24:
 						break;
 					case 24:
-						{return ops.unidadGuionControl();}
+						{return ops.unidadNegacion();}
 					case -25:
 						break;
 					case 25:
-						{return ops.unidadIf();}
+						{return ops.unidadAperturaCondicional();}
 					case -26:
 						break;
 					case 26:
-						{return ops.unidadSep();}
+						{return ops.unidadAccesoArray();}
 					case -27:
 						break;
 					case 27:
-						{return ops.unidadAccesoArray();}
+						{return ops.unidadDimension();}
 					case -28:
 						break;
 					case 28:
-						{return ops.unidadDimension();}
+						{return ops.unidadSimboloBucle();}
 					case -29:
 						break;
 					case 29:
-						{return ops.unidadSimboloBucle();}
+						{return ops.unidadLogico();}
 					case -30:
 						break;
 					case 30:
-						{return ops.unidadAsig();}
+						{return ops.unidadEntero();}
 					case -31:
 						break;
 					case 31:
-						{return ops.unidadLogico();}
+						{return ops.unidadFSi();}
 					case -32:
 						break;
 					case 32:
-						{return ops.unidadEntero();}
+						{return ops.unidadCons();}
 					case -33:
 						break;
 					case 33:
-						{return ops.unidadCons();}
+						{return ops.unidadSino();}
 					case -34:
 						break;
 					case 34:
-						{return ops.unidadSino();}
+						{return ops.unidadTrue();}
 					case -35:
 						break;
 					case 35:
-						{return ops.unidadTrue();}
+						{return ops.unidadAsig();}
 					case -36:
 						break;
 					case 36:
@@ -586,16 +600,16 @@ public class SELA implements java_cup.runtime.Scanner {
 						{return ops.unidadFinBloque();}
 					case -41:
 						break;
-					case 42:
-						{errores.errorLexico(fila(), lexema());}
+					case 41:
+						{return ops.unidadFMientras();}
 					case -42:
 						break;
 					case 43:
-						{return ops.unidadIdV();}
+						{errores.errorLexico(fila(), lexema());}
 					case -43:
 						break;
 					case 44:
-						{}
+						{return ops.unidadIdV();}
 					case -44:
 						break;
 					case 46:
@@ -615,10 +629,10 @@ public class SELA implements java_cup.runtime.Scanner {
 					case -48:
 						break;
 					case 52:
-						{return ops.unidadIdV();}
+						{errores.errorLexico(fila(), lexema());}
 					case -49:
 						break;
-					case 54:
+					case 53:
 						{return ops.unidadIdV();}
 					case -50:
 						break;
@@ -626,149 +640,185 @@ public class SELA implements java_cup.runtime.Scanner {
 						{return ops.unidadIdV();}
 					case -51:
 						break;
-					case 56:
+					case 57:
 						{return ops.unidadIdV();}
 					case -52:
 						break;
-					case 57:
+					case 59:
 						{return ops.unidadIdV();}
 					case -53:
 						break;
-					case 58:
+					case 60:
 						{return ops.unidadIdV();}
 					case -54:
 						break;
-					case 59:
+					case 61:
 						{return ops.unidadIdV();}
 					case -55:
 						break;
-					case 60:
+					case 62:
 						{return ops.unidadIdV();}
 					case -56:
 						break;
-					case 61:
+					case 63:
 						{return ops.unidadIdV();}
 					case -57:
 						break;
-					case 62:
+					case 64:
 						{return ops.unidadIdV();}
 					case -58:
 						break;
-					case 63:
+					case 65:
 						{return ops.unidadIdV();}
 					case -59:
 						break;
-					case 64:
+					case 66:
 						{return ops.unidadIdV();}
 					case -60:
 						break;
-					case 65:
+					case 67:
 						{return ops.unidadIdV();}
 					case -61:
 						break;
-					case 66:
+					case 68:
 						{return ops.unidadIdV();}
 					case -62:
 						break;
-					case 67:
+					case 69:
 						{return ops.unidadIdV();}
 					case -63:
 						break;
-					case 68:
+					case 70:
 						{return ops.unidadIdV();}
 					case -64:
 						break;
-					case 69:
+					case 71:
 						{return ops.unidadIdV();}
 					case -65:
 						break;
-					case 70:
+					case 72:
 						{return ops.unidadIdV();}
 					case -66:
 						break;
-					case 71:
+					case 73:
 						{return ops.unidadIdV();}
 					case -67:
 						break;
-					case 72:
+					case 74:
 						{return ops.unidadIdV();}
 					case -68:
 						break;
-					case 73:
+					case 75:
 						{return ops.unidadIdV();}
 					case -69:
 						break;
-					case 74:
+					case 76:
 						{return ops.unidadIdV();}
 					case -70:
 						break;
-					case 75:
+					case 77:
 						{return ops.unidadIdV();}
 					case -71:
 						break;
-					case 76:
+					case 78:
 						{return ops.unidadIdV();}
 					case -72:
 						break;
-					case 77:
+					case 79:
 						{return ops.unidadIdV();}
 					case -73:
 						break;
-					case 78:
+					case 80:
 						{return ops.unidadIdV();}
 					case -74:
 						break;
-					case 79:
+					case 81:
 						{return ops.unidadIdV();}
 					case -75:
 						break;
-					case 80:
+					case 82:
 						{return ops.unidadIdV();}
 					case -76:
 						break;
-					case 81:
+					case 83:
 						{return ops.unidadIdV();}
 					case -77:
 						break;
-					case 82:
+					case 84:
 						{return ops.unidadIdV();}
 					case -78:
 						break;
-					case 83:
+					case 85:
 						{return ops.unidadIdV();}
 					case -79:
 						break;
-					case 84:
+					case 86:
 						{return ops.unidadIdV();}
 					case -80:
 						break;
-					case 85:
+					case 87:
 						{return ops.unidadIdV();}
 					case -81:
 						break;
-					case 86:
+					case 88:
 						{return ops.unidadIdV();}
 					case -82:
 						break;
-					case 87:
+					case 89:
 						{return ops.unidadIdV();}
 					case -83:
 						break;
-					case 88:
+					case 90:
 						{return ops.unidadIdV();}
 					case -84:
 						break;
-					case 89:
+					case 91:
 						{return ops.unidadIdV();}
 					case -85:
 						break;
-					case 90:
+					case 92:
 						{return ops.unidadIdV();}
 					case -86:
 						break;
-					case 91:
+					case 93:
 						{return ops.unidadIdV();}
 					case -87:
+						break;
+					case 94:
+						{return ops.unidadIdV();}
+					case -88:
+						break;
+					case 95:
+						{return ops.unidadIdV();}
+					case -89:
+						break;
+					case 96:
+						{return ops.unidadIdV();}
+					case -90:
+						break;
+					case 97:
+						{return ops.unidadIdV();}
+					case -91:
+						break;
+					case 98:
+						{return ops.unidadIdV();}
+					case -92:
+						break;
+					case 99:
+						{return ops.unidadIdV();}
+					case -93:
+						break;
+					case 100:
+						{return ops.unidadIdV();}
+					case -94:
+						break;
+					case 101:
+						{return ops.unidadIdV();}
+					case -95:
+						break;
+					case 102:
+						{return ops.unidadIdV();}
+					case -96:
 						break;
 					default:
 						yy_error(YY_E_INTERNAL,false);

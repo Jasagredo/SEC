@@ -86,8 +86,11 @@ public class SELAOperations {
 	public Symbol unidadEntonces() {
 		return sec.symbol("entonces",SESASym.ENTONCES, "entonces");     
 	} 
-	public Symbol unidadGuionControl() {
-		return sec.symbol("~",SESASym.GCONTROL, "~");     
+	public Symbol unidadFSi() {
+		return sec.symbol("fsi",SESASym.FSI, "fsi");     
+	} 
+	public Symbol unidadFMientras() {
+		return sec.symbol("fmientras",SESASym.FMIENTRAS, "fmientras");     
 	} 
 	public Symbol unidadSino() {
 		return sec.symbol("sino", SESASym.SINO, "sino");     
