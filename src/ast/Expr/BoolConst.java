@@ -6,8 +6,8 @@ public class BoolConst extends Base  {
 		literal = k;
 	}
 	
-	public String mostrar()
+	public String toString()
 	{
-		return ((Integer) literal).toString();
+		return "Bool" + ((Integer) literal).toString();
 	}
 }

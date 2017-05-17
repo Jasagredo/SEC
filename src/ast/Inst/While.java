@@ -14,7 +14,7 @@ public class While implements Inst{
 		this.cuerpo = cuerpo;
 	}
 	
-	public String mostrar()
+	public String toString()
 	{
 		Iterator<InstCond> it = cuerpo.iterator();
 		String s = "";

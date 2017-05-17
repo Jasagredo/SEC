@@ -16,15 +16,15 @@ public class IfThenElse implements Inst{
 		this.le = le;
 	}
 	
-	public String mostrar()
+	public String toString()
 	{
 		Iterator<InstCond> it1 = li.iterator();
 		String s1 = "";
-		while (it1.hasNext()) s1 = s1 + (it1.next()).mostrar() + "\n";
+		while (it1.hasNext()) s1 = s1 + (it1.next()).toString() + "\n";
 		Iterator<InstCond> it2 = le.iterator();
 		String s2 = "";
-		while (it2.hasNext()) s2 = s2 + it2.next().mostrar() + "\n";
-		return "if " + e.mostrar() + "\n " + s1 + "else \n" + s2;
+		while (it2.hasNext()) s2 = s2 + it2.next().toString() + "\n";
+		return "if " + e.toString() + "\n " + s1 + "else \n" + s2;
 	}
 	
 }

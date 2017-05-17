@@ -12,7 +12,7 @@ public class TipoC {
 		d.add(Integer.parseInt(dim.substring(0, dim.length()-2)));
 	}
 	
-	public String mostrar()
+	public String toString()
 	{
 		return "Tipo conpuesto " + t.toString() + "[" + d + "]";
 	}

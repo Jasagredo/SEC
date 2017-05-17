@@ -16,10 +16,10 @@ public class Acceso extends Expr {
 		}
 	}
 	
-	public String mostrar()
+	public String toString()
 	{
 		Iterator<Integer> it = dim.iterator();
-		String s="";
+		String s= Id;
 		while (it.hasNext()) {
 		 
 		s = s + "[" + it.next().toString() + "]";

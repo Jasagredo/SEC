@@ -27,21 +27,21 @@ public class Dec {
 		this.ad = ad;
 	}
 	
-	public String mostrar()
+	public String toString()
 	{
 		String r = "Declaración";
 		if (ad != null) 
 		{
-			r = r + tc.mostrar() + " ";
+			r = r + tc.toString() + " ";
 			Iterator<Base> it = ad.iterator();
 			r = r + "{";
-			while(it.hasNext()) r = r + it.next().mostrar() + ",";
+			while(it.hasNext()) r = r + it.next().toString() + ",";
 			r = r + "}";
 		}
 		else 
 		{
-			r = r + " " + t.toString() + " " + i.mostrar() + " ";
-			if (e != null) r = r + e.mostrar();
+			r = r + " " + t.toString() + " " + i.toString() + " ";
+			if (e != null) r = r + e.toString();
 		}
 		return r;
 	}

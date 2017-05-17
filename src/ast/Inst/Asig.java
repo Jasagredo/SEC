@@ -10,8 +10,8 @@ public class Asig implements Inst {
 		this.e = e;
 	}
 
-	public String mostrar() {
-		return id.mostrar() + " " + e.mostrar();
+	public String toString() {
+		return id.toString() + " " + e.toString();
 	}
 	
 	

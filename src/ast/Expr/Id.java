@@ -6,7 +6,7 @@ public class Id extends Expr {
 		id = i;
 	}
 	
-	public String mostrar()
+	public String toString()
 	{
 		return id;
 	}

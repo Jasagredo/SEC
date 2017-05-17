@@ -13,12 +13,12 @@ public class Ifthen implements Inst{
 		this.li = li;
 	}
 	
-	public String mostrar()
+	public String toString()
 	{
 		Iterator<InstCond> it1 = li.iterator();
 		String s1 = "";
-		while (it1.hasNext()) s1 = s1 + it1.next().mostrar() + "\n";
-		return "if " + cond.mostrar() + " " + s1 + " else";
+		while (it1.hasNext()) s1 = s1 + it1.next().toString() + "\n";
+		return "if " + cond.toString() + " " + s1 + " else";
 	}
 	
 }

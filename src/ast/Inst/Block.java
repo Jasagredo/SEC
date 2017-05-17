@@ -14,14 +14,14 @@ public class Block implements Inst{
 		this.li = li;
 	};
 	
-	public String mostrar()
+	public String toString()
 	{
 		Iterator<Dec> it1 = ld.iterator();
 		String s1 = "";
-		while (it1.hasNext()) s1 = s1 + it1.next().mostrar() + "\n";
+		while (it1.hasNext()) s1 = s1 + it1.next().toString() + "\n";
 		Iterator<Inst> it2 = li.iterator();
 		String s2 = "";
-		while (it2.hasNext()) s2 = s2 + it2.next().mostrar() + "\n";
+		while (it2.hasNext()) s2 = s2 + it2.next().toString() + "\n";
 		return "bloque\n" + s1 + "\n--\n" + s2 + "finbloque";
 	}
 	

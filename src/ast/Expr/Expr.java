@@ -14,9 +14,9 @@ public class Expr {
 		this.valueB = vB;
 	}
 	
-	public String mostrar()
+	public String toString()
 	{
-		return valueA.mostrar() + " " + op.mostrar() + " " + valueB.mostrar();
+		return valueA.toString() + " " + op.toString() + " " + valueB.toString();
 	}
 
 }

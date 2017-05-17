@@ -5,7 +5,7 @@ public class NumConst extends Base{
 		literal = i;
 	}
 	
-	public String mostrar()
+	public String toString()
 	{
 		return ((Integer) literal).toString();
 	}

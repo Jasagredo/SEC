@@ -16,7 +16,7 @@ public class Main {
 	 SELA sela = new SELA(input, new ComplexSymbolFactory());
 	 parser asint = new parser(sela, new ComplexSymbolFactory());
 	 Symbol s = asint.parse();
-	 System.out.println(((Block) (s.value)).mostrar());
+	 System.out.println((Block) (s.value));
  }
 }
    
