@@ -27,9 +27,10 @@ public class Dec {
 		this.ad = ad;
 	}
 	
-	public String toString()
+	public String toString(String acc)
 	{
-		String r = "Declaración";
+		String r = acc + "Dec";
+		if (cons) r += " cons";
 		if (ad != null) 
 		{
 			r = r + tc.toString() + " ";

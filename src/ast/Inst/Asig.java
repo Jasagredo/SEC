@@ -10,8 +10,8 @@ public class Asig implements Inst {
 		this.e = e;
 	}
 
-	public String toString() {
-		return id.toString() + " " + e.toString();
+	public String toString(String acc) {
+		return acc + "Asig " + id.toString() + " = " + e.toString();
 	}
 	
 	

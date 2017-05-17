@@ -14,11 +14,11 @@ public class While implements Inst{
 		this.cuerpo = cuerpo;
 	}
 	
-	public String toString()
+	public String toString(String acc)
 	{
 		Iterator<InstCond> it = cuerpo.iterator();
-		String s = "";
-		while (it.hasNext()) s = s + it.next().toString() + "\n";
-		return "while " + e.toString() + " " + s;
+		String s = acc;
+		while (it.hasNext()) s = s + it.next().toString(acc) + "\n";
+		return acc + "while " + e.toString() + "\n" + s;
 	}
 }

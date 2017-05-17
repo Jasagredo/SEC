@@ -8,6 +8,6 @@ public class BoolConst extends Base  {
 	
 	public String toString()
 	{
-		return "Bool" + ((Integer) literal).toString();
+		return literal == 1 ? "true" : "false";
 	}
 }

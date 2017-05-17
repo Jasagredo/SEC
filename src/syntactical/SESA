@@ -36,7 +36,7 @@ terminal     CONS,
 terminal Tipo LOG, ENT;
 terminal Operadores MAS, MENOS, POR, DIV, IGUAL, MAYOR, MENOR, CON, DIS, NEG;
 terminal String ACCESO, IDV, DIM;
-terminal int NUMENT;
+terminal String NUMENT;
 terminal boolean TRUE, FALSE;
 
 non terminal Block Programa;

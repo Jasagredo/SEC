@@ -2,7 +2,7 @@ package ast.Inst;
 
 public class Vacia implements Inst{
 
-	public String mostrar() {
+	public String toString(String acc) {
 		return "";
 	}
 	

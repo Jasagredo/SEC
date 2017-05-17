@@ -8,13 +8,10 @@ public class InstCond {
 		this.i = i;
 	}
 	
-	public String toString()
+	public String toString(String acc)
 	{
-		String str = "COND";
-		for (int k = 0; k < ng; k++){
-			str += "COND";
-		}
-		return str + i.toString();
+		String str = acc + "COND ";
+		return str + i.toString(acc);
 	}
 	
 }
