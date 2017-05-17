@@ -92,14 +92,14 @@ puntoycoma = \;
 %%
 
 {dimension}				  {return ops.unidadDimension();}
-{cons}				{return ops.unidadCons();}
-{aperturaAcceso}	{return ops.unidadApAcc();}
-{cierreAcceso}		{return ops.unidadCiAcc();}
-{puntoycoma}		{return ops.unidadPyC();}
+{cons}					  {return ops.unidadCons();}
+{aperturaAcceso}		  {return ops.unidadApAcc();}
+{cierreAcceso}			  {return ops.unidadCiAcc();}
+{puntoycoma}			  {return ops.unidadPyC();}
 {separador}               {return ops.unidadSep();}
-{comentario}		  {}
-{blancos}				{}
-{numeroEntero}		  {return ops.unidadNumeroEntero();}
+{comentario}		  	  {}
+{blancos}				  {}
+{numeroEntero}		  	  {return ops.unidadNumeroEntero();}
 {igual}                   {return ops.unidadIgual();}
 {mayor}                   {return ops.unidadMayor();}
 {menor}                   {return ops.unidadMenor();}
@@ -119,15 +119,15 @@ puntoycoma = \;
 {parentesisCierre}        {return ops.unidadParentesisCierre();}
 {asig}                    {return ops.unidadAsig();}
 {finInstruccion}          {return ops.unidadFinInstruccion();}
-{if}			  {return ops.unidadIf();}
+{if}			  		  {return ops.unidadIf();}
 {aperturaCondicional}	  {return ops.unidadAperturaCondicional();}
 {cierreCondicional}  	  {return ops.unidadCierreCondicional();}
-{entonces}		  {return ops.unidadEntonces();}
-{guionControl}		  {return ops.unidadGuionControl();}
-{sino}			  {return ops.unidadSino();}
-{mientras}		  {return ops.unidadMientras();}
+{entonces}		  		  {return ops.unidadEntonces();}
+{guionControl}		  	  {return ops.unidadGuionControl();}
+{sino}			  		  {return ops.unidadSino();}
+{mientras}		  	 	  {return ops.unidadMientras();}
 {simboloBucle}	          {return ops.unidadSimboloBucle();}
 {accesoArray}	          {return ops.unidadAccesoArray();}
 {identificadorV}          {return ops.unidadIdV();}
 {operadorMenos}           {return ops.unidadOperadorMenos();}
-.                       {errores.errorLexico(fila(), lexema());}
+.                         {errores.errorLexico(fila(), lexema());}
