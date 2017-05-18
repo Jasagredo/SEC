@@ -29,19 +29,21 @@ public class Dec {
 	
 	public String toString(String acc)
 	{
-		String r = acc + "Dec";
-		if (cons) r += " cons";
-		if (ad != null) 
+		String r = acc + "Declaración ";
+		if (cons) r += "constante";
+		if (tc != null) 
 		{
-			r = r + tc.toString() + " ";
-			Iterator<Base> it = ad.iterator();
-			r = r + "{";
-			while(it.hasNext()) r = r + it.next().toString() + ",";
-			r = r + "}";
+			r = r + tc.toString() + " " + i.toString();
+			if (ad != null) { 
+				Iterator<Base> it = ad.iterator();
+				r = r + "{";
+				while(it.hasNext()) r = r + it.next().toString() + ",";
+				r = r + "}";
+			}
 		}
 		else 
 		{
-			r = r + " " + t.toString() + " " + i.toString() + " ";
+			r = r + t.toString() + " " + i.toString() + " ";
 			if (e != null) r = r + e.toString();
 		}
 		return r;

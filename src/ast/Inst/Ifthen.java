@@ -18,7 +18,7 @@ public class Ifthen implements Inst{
 		Iterator<Inst> it1 = li.iterator();
 		String s1 = "";
 		while (it1.hasNext()) s1 = s1 + it1.next().toString(acc + "\t") + "\n";
-		return acc + "if " + cond.toString() + "\n" + s1;
+		return acc + "Si #" + cond.toString() + "#\n" + s1 + acc + "FinSi";
 	}
 	
 }

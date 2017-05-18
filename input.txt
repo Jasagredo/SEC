@@ -1,12 +1,25 @@
 bloque
 Ent e1!
-cons Ent!
+cons Ent e2!
 Log l1!
+Ent[10][12][15] e1!
 --
 l1 <·· ¬true!
 si ¿¬true? entonces
-e1 <·· 2!
+	e1 <·· 2!
+	si ¿l1? entonces
+		e1 <·· 3!
+	fsi
+	e1<·· 4!
 sino
-e2 <·· 3!
+	e2 <·· 5!
+	mientras ¿l3 > l2? ...
+		e1_{i}_{15} <·· 10!
+	    bloque
+	    Ent e2!
+	    --
+	    e2 <·· 5!
+	    finbloque
+	fmientras
 fsi
 finbloque

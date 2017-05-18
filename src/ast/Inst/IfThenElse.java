@@ -24,7 +24,7 @@ public class IfThenElse implements Inst{
 		Iterator<Inst> it2 = le.iterator();
 		String s2 = "";
 		while (it2.hasNext()) s2 = s2 + it2.next().toString(acc + "\t") + "\n";
-		return acc + "if " + e.toString() + "\n " + s1 + acc +"else \n" + s2;
+		return acc + "Si #" + e.toString() + "#\n " + s1 + acc +"Sino \n" + s2 + acc + "FinSi";
 	}
 	
 }

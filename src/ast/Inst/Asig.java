@@ -11,7 +11,7 @@ public class Asig implements Inst {
 	}
 
 	public String toString(String acc) {
-		return acc + "Asig " + id.toString() + " = " + e.toString();
+		return acc + "Asigación a la variable #" + id.toString() + "# el valor de #" + e.toString() + "#";
 	}
 	
 	

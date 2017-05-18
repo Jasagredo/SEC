@@ -82,8 +82,8 @@ Dec ::= Tipo:t IDV:i FININSTR 									{: RESULT = new Dec(t, new Id(i), null); 
 Tipo ::= ENT													{: RESULT = Tipo.ENT; :}
 	| LOG														{: RESULT = Tipo.LOG; :}
 	;
-TipoC ::= Tipo:t DIM:d 											{: RESULT = new TipoC(t, d); :}
-	| TipoC:t DIM:dim											{: t.d.add(Integer.parseInt(dim.substring(0, dim.length()-2))); RESULT = t; :}
+TipoC ::= TipoC:t DIM:dim											{: t.d.add(Integer.parseInt(dim.substring(1, dim.length()-1))); RESULT = t; :}
+	| Tipo:t DIM:d 											{: RESULT = new TipoC(t, d); :}
 	;
 Base ::= BaseE:b												{: RESULT = b; :}
 	| BaseL:l													{: RESULT = l; :}
@@ -106,8 +106,8 @@ Instr ::= FININSTR												{: RESULT = new Vacia(); :}
     | IF APCON Exp:e CICON ENTONCES ListaInstr:l SINO ListaInstr:m FSI{: RESULT = new IfThenElse(e, l, m); :}
     | MIENTRAS APCON Exp:e CICON SBUCLE ListaInstr:l FMIENTRAS		{: RESULT = new While(e, l); :}
     ;
-Var ::= IDV:i													{: RESULT = new Id(i); :}
-	| ACCESO:a													{: RESULT = new Acceso(a); :}
+Var ::= Var:i ACCESO:a											{: RESULT = new Acceso(i, a); :}
+	| IDV:i														{: RESULT = new Id(i); :} 
 	;
 Exp ::= BaseE:b													{: RESULT = b; :}
 	| BaseL:l													{: RESULT = l; :}

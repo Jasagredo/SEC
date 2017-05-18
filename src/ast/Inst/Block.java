@@ -21,12 +21,13 @@ public class Block implements Inst{
 	public String toString(String acc)
 	{
 		Iterator<Dec> it1 = ld.iterator();
-		String s1 = acc + "Bloque\n" + acc + "ListDec\n";
+		String s1 = acc + "Bloque\n" + acc + "Comienzo de ListDec\n";
 		while (it1.hasNext()) s1 = s1 + it1.next().toString(acc + "\t") + "\n";
+		
 		Iterator<Inst> it2 = li.iterator();
-		String s2 = acc + "ListInstr\n";
+		String s2 = acc + "Comienzo de ListInstr\n";
 		while (it2.hasNext()) s2 = s2 + it2.next().toString(acc + "\t") + "\n";
-		return s1 + acc + "--\n" + s2 + acc + "finbloque";
+		return s1 + acc+ "Fin de ListDec\n" + acc + "--\n" + s2 + acc +"Fin de ListInstr\n" + acc + "finbloque";
 	}
 	
 }
