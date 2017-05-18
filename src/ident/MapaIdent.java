@@ -7,6 +7,7 @@ import java.util.Map;
 import ast.Dec.*;
 import ast.Expr.*;
 import ast.Inst.*;
+import excp.SemanticException;
 import java_cup.runtime.Symbol;
 
 public class MapaIdent {
@@ -28,9 +29,10 @@ public class MapaIdent {
 		this.nivel--;
 	}
 	
-	private void anadirId(String id, Dec s){
+	private void anadirId(String id, Dec s) throws Exception{
 		TIdent t;
 		if (mapa.get(id) != null) {
+			if (mapa.get(id).actual == nivel) throw new Exception();
 			t = new TIdent(nivel, s, mapa.get(id));
 		} else {
 			t = new TIdent(nivel, s, null);
@@ -39,14 +41,18 @@ public class MapaIdent {
 	}
 	
 	private Dec buscarId(String id){
-		return mapa.get(id).dec; 
+			return mapa.get(id).dec; 
 	}
 	
-	private void parsearBlock(Block a){
+	private void parsearBlock(Block a) throws SemanticException {
 		Iterator<Dec> it = a.ld.iterator();
 		while(it.hasNext()){
 			Dec d = it.next();
-			anadirId(d.i.id, d);
+			try {
+				anadirId(d.i.id, d);
+			} catch (Exception e) {
+				throw new SemanticException("Error semántico: Identificador " + d.i.id + " ya declarado. Tipo de la declaración inicial: " + mapa.get(d.i.id).dec.t.name() + ". Tipo de la nueva declaración: " + d.t.name());
+			}
 		}
 		Iterator<Inst> ii = a.li.iterator();
 		while(ii.hasNext()){
@@ -55,23 +61,32 @@ public class MapaIdent {
 		}
 	}
 	
-	private void parsearExpr(Expr e){
-		if (e instanceof Id){
-			((Id) e).d = buscarId(((Id) e).id);
-		} else if (e instanceof Acceso){
-			((Id) ((Acceso) e).id).d = buscarId(((Id) ((Acceso) e).id).id);
-			Iterator<Expr> ie = ((Acceso) e).dim.iterator();
-			while (ie.hasNext()){
-				Expr i = ie.next();
-				parsearExpr(i);
+	private void parsearExpr(Expr e) throws SemanticException{
+
+			if (e instanceof Id){
+				try {
+					((Id) e).d = buscarId(((Id) e).id);
+				} catch (NullPointerException e1){
+					throw new SemanticException("Error semántico: identificador " + ((Id) e).id + " no declarado.");
+				}
+			} else if (e instanceof Acceso){
+				try {
+					((Id) ((Acceso) e).id).d = buscarId(((Id) ((Acceso) e).id).id);
+					Iterator<Expr> ie = ((Acceso) e).dim.iterator();
+					while (ie.hasNext()){
+						Expr i = ie.next();
+						parsearExpr(i);
+					}
+				} catch (NullPointerException e1){
+					throw new SemanticException("Error semántico: identificador " + ((Id) ((Acceso) e).id).id + " no declarado.");
+				}
+			} else {
+				if (e.valueA != null) parsearExpr(e.valueA);
+				if (e.valueB != null) parsearExpr(e.valueB);
 			}
-		} else {
-			if (e.valueA != null) parsearExpr(e.valueA);
-			if (e.valueB != null) parsearExpr(e.valueB);
 		}
-	}
 	
-	private void parsearInst(Inst i) {
+	private void parsearInst(Inst i) throws SemanticException{
 		if (i instanceof Block){
 			entrarBloque();
 			parsearBlock((Block) i);
@@ -108,7 +123,7 @@ public class MapaIdent {
 		} 	
 	}
 
-	public void parsear(Symbol s){
+	public void parsear(Symbol s) throws SemanticException{
 		parsearBlock((Block) s.value);
 	}
 }

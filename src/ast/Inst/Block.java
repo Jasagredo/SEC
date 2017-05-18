@@ -9,7 +9,6 @@ public class Block implements Inst{
 	public List<Dec> ld;
 	public List<Inst> li;
 	public Block(List<Dec> ld, List<Inst> li) {
-		super();
 		this.ld = ld;
 		this.li = li;
 	};
