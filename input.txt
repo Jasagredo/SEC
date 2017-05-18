@@ -3,6 +3,7 @@ Ent e1!
 cons Ent e2!
 Log l1!
 Ent[10][12][15] e3!
+Ent l1!
 --
 l1 <·· ¬true!
 si ¿¬true? entonces
@@ -13,8 +14,8 @@ si ¿¬true? entonces
 	e1 <·· 4!
 sino
 	e2 <·· 5!
-	mientras ¿(e1 + e2) > e2? ...
-		e1 <·· 10!
+	mientras ¿(e1 + e2 * e2 > e2 & (l1 ~ e1 = e2))? ...
+		e1_{10} <·· e3!
 	    bloque
 	    Log e2!
 	    --

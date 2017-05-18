@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TipoC {
-	Tipo t;
+	public Dec dec;
+	public Tipo t;
 	public List<Integer> d;
 	public TipoC(Tipo t, String dim) {
 		this.t = t;
+		dec = null;
 		d = new ArrayList<Integer>();
 		d.add(Integer.parseInt(dim.substring(1, dim.length()-1)));
 	}

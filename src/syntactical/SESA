@@ -55,20 +55,21 @@ non terminal Expr Var;
 non terminal Operadores OPC;
 non terminal Expr Exp;
 			  
-precedence left IGUAL;
-precedence left MENOR, MAYOR;
-precedence left MAS, MENOS;
-precedence left DIS;
-precedence left CON;
+
 precedence left POR, DIV;
+precedence left CON;
+precedence left DIS;
+precedence left MAS, MENOS;
+precedence left MENOR, MAYOR;
+precedence left IGUAL;
 precedence left SINO;
 
 start with Programa;
 
 Programa  ::=  BLOQUE ListaDec:ld SEP ListaInstr:li FBLOQUE 	{: RESULT = new Block(ld, li); :}
     ;
-ListaDec  ::=  Dec:d ListaDec:ld 								{: ld.add(d); RESULT = ld; :}
-	| CONS Dec:d ListaDec:ld									{: d.cons = true; ld.add(d); RESULT = ld; :}
+ListaDec  ::=  Dec:d ListaDec:ld 								{: ld.add(0, d); RESULT = ld; :}
+	| CONS Dec:d ListaDec:ld									{: d.cons = true; ld.add(0, d); RESULT = ld; :}
     |															{: RESULT = new ArrayList<Dec>(); :}
     ;
 ListaInstr  ::= ListaInstr:li Instr:i							{: li.add(i); RESULT = li; :}
@@ -102,7 +103,7 @@ NumPYC ::= NumPYC:n PYC Base:b									{: n.add((Base)b); RESULT = n; :}
 Instr ::= FININSTR												{: RESULT = new Vacia(); :}
     | Programa:p												{: RESULT = p; :}
     | Exp:s ASIG Exp:e FININSTR									{: RESULT = new Asig(s,e); :}
-    | IF APCON Exp:e CICON ENTONCES ListaInstr:l FSI			{: RESULT = new Ifthen(e, l); :}
+    | IF APCON Exp:e CICON ENTONCES ListaInstr:l FSI			{: RESULT = new IfThen(e, l); :}
     | IF APCON Exp:e CICON ENTONCES ListaInstr:l SINO ListaInstr:m FSI{: RESULT = new IfThenElse(e, l, m); :}
     | MIENTRAS APCON Exp:e CICON SBUCLE ListaInstr:l FMIENTRAS		{: RESULT = new While(e, l); :}
     ;
@@ -120,7 +121,7 @@ OPC ::= MAYOR													{: RESULT = Operadores.MAYOR; :}
 	| MENOR														{: RESULT = Operadores.MENOR; :}
 	| IGUAL														{: RESULT = Operadores.IGUAL; :}
 	| CON														{: RESULT = Operadores.CON; :}
-	| DIS
+	| DIS														{: RESULT = Operadores.DIS; :}
 	| MAS														{: RESULT = Operadores.MAS; :}
 	| MENOS														{: RESULT = Operadores.MENOS; :}
 	| POR														{: RESULT = Operadores.POR; :}

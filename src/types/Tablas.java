@@ -4,6 +4,12 @@ import ast.Dec.Tipo;
 import excp.TypeException;
 
 public class Tablas {
+	
+	public Tipo Acc(Tipo t) throws TypeException{
+		if (t == Tipo.ENT) return Tipo.ENT;
+		throw new TypeException("Acceso con un índice que no es de tipo entero");
+	}
+	
 	public Tipo Mas(Tipo t1, Tipo t2) throws TypeException{
 		if (t1 == Tipo.ENT && t1 == t2){
 			return Tipo.ENT;

@@ -15,7 +15,6 @@ import ast.Inst.IfThen;
 import ast.Inst.IfThenElse;
 import ast.Inst.Inst;
 import ast.Inst.While;
-import excp.SemanticException;
 import excp.TypeException;
 import java_cup.runtime.Symbol;
 
@@ -32,11 +31,20 @@ public class SETC {
 	}
 	
 	private Tipo parsearExpr(Expr e) throws TypeException{
-
-			if (e instanceof Id){
+			try{
+				if (e instanceof Id){
+					if (((Id) e).d.tc != null){
+						throw new TypeException("Intento de utilización de una colección sin acceder a un elemento");
+					}
 				return ((Id) e).d.t;
 			} else if (e instanceof Acceso){
-				return ((Acceso) e).id.d.t;
+				if (((Acceso) e).id.d.t != null){
+					throw new TypeException("Intento de acceder a un índice de un elemento que no es una colección");
+				}
+				Iterator<Expr> it = ((Acceso) e).dim.iterator();
+				while (it.hasNext()) t.Acc(parsearExpr(it.next()));
+				if (((Acceso) e).dim.size() != ((Acceso) e).id.d.tc.d.size()) throw new TypeException("Número de índices de acceso no consistente con las dimensiones de la declaración");
+				return ((Acceso) e).id.d.tc.t;
 			} else if (e instanceof BoolConst){
 				return Tipo.LOG;
 			} else if (e instanceof NumConst){
@@ -65,10 +73,14 @@ public class SETC {
 					return t.Por(parsearExpr(e.valueA), parsearExpr(e.valueB));
 				}
 			}
+			} catch (TypeException te){
+				throw new TypeException(te.getMessage() + " en la expresión " + e.toString());
+			}
+
 		}
 	
 	private void parsearInst(Inst i) throws TypeException{
-		if (i instanceof Block){
+			if (i instanceof Block){
 			parsearBlock((Block) i);
 		} else if (i instanceof Asig) {
 			t.Asig(parsearExpr(((Asig) i).id), parsearExpr(((Asig) i).e));

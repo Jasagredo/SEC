@@ -57,7 +57,7 @@ igual = \=
 mayor = >
 menor = <
 conjuncion = &
-disyuncion = \|
+disyuncion = ~
 negacion = ¬
 operadorMas = \+
 operadorMenos = -
