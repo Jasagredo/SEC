@@ -17,8 +17,8 @@ public class Expr {
 	public String toString()
 	{
 		if (valueA != null)
-		return valueA.toString() + " " + op.toString() + " " + valueB.toString();
-		return op.toString() + " " + valueB.toString();
+		return "(" + valueA.toString() + " " + op.toString() + " " + valueB.toString() + ")";
+		return "(" + op.toString() + " " + valueB.toString() + ")";
 	}
 
 }

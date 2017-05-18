@@ -13,7 +13,7 @@ si ¿¬true? entonces
 	e1<·· 4!
 sino
 	e2 <·· 5!
-	mientras ¿l3 > l2? ...
+	mientras ¿(e1 + e2) > l2? ...
 		e1_{i}_{15} <·· 10!
 	    bloque
 	    Ent e2!
