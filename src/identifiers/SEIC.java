@@ -1,8 +1,6 @@
 package identifiers;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 import ast.Dec.*;
 import ast.Expr.*;
@@ -24,16 +22,16 @@ public class SEIC {
 	
 	private void salirBloque(){
 		for (Map.Entry<String, TIdent> entry : mapa.entrySet()) {
-			if (entry.getValue().actual == this.nivel) mapa.put(entry.getKey(), entry.getValue().sigDec);
+			if (entry.getValue().actual == this.nivel) mapa.put(entry.getKey(), entry.getValue().sigDec); // Restauramos el que estaba a un niel menor (o se pone a null)
 		}
 		this.nivel--;
 	}
 	
-	private void anadirId(String id, Dec s) throws Exception{
+	private void anadirId(String id, Dec s) throws Exception{ // Añadir un nuevo identificador
 		TIdent t;
 		if (mapa.get(id) != null) {
-			if (mapa.get(id).actual == nivel) throw new Exception();
-			t = new TIdent(nivel, s, mapa.get(id));
+			if (mapa.get(id).actual == nivel) throw new Exception(); // Ya existe un identificador con el mismo id en el mismo nivel
+			t = new TIdent(nivel, s, mapa.get(id)); // Remplazamos el anterior valor pero guardando un puntero para restaurarlo al bajar de nivel
 		} else {
 			t = new TIdent(nivel, s, null);
 		}

@@ -30,7 +30,7 @@ public class Dec {
 	public String toString(String acc)
 	{
 		String r = acc + "Declaración ";
-		if (cons) r += "constante";
+		if (cons) r += "constante ";
 		if (tc != null) 
 		{
 			r = r + tc.toString() + " " + i.toString();

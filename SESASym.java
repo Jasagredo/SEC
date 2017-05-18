@@ -7,7 +7,7 @@
 package syntactical;
 
 /** CUP generated class containing symbol constants. */
-public class SESASym {
+public class sym {
   /* terminals */
   public static final int FBLOQUE = 4;
   public static final int SEP = 5;

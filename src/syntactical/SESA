@@ -52,8 +52,13 @@ non terminal List<Base> DecArray;
 non terminal List<Base> NumPYC;
 non terminal Inst Instr;
 non terminal Expr Var;
-non terminal Operadores OPC;
+non terminal Operadores OPC1;
+non terminal Operadores OPC2;
+non terminal Operadores OPC3;
 non terminal Expr Exp;
+non terminal Expr Exp1;
+non terminal Expr Exp2;
+non terminal Expr Exp3;
 			  
 
 precedence left POR, DIV;
@@ -102,10 +107,10 @@ NumPYC ::= NumPYC:n PYC Base:b									{: n.add((Base)b); RESULT = n; :}
 	;
 Instr ::= FININSTR												{: RESULT = new Vacia(); :}
     | Programa:p												{: RESULT = p; :}
-    | Exp:s ASIG Exp:e FININSTR									{: RESULT = new Asig(s,e); :}
-    | IF APCON Exp:e CICON ENTONCES ListaInstr:l FSI			{: RESULT = new IfThen(e, l); :}
-    | IF APCON Exp:e CICON ENTONCES ListaInstr:l SINO ListaInstr:m FSI{: RESULT = new IfThenElse(e, l, m); :}
-    | MIENTRAS APCON Exp:e CICON SBUCLE ListaInstr:l FMIENTRAS		{: RESULT = new While(e, l); :}
+    | Exp1:s ASIG Exp1:e FININSTR									{: RESULT = new Asig(s,e); :}
+    | IF APCON Exp1:e CICON ENTONCES ListaInstr:l FSI			{: RESULT = new IfThen(e, l); :}
+    | IF APCON Exp1:e CICON ENTONCES ListaInstr:l SINO ListaInstr:m FSI{: RESULT = new IfThenElse(e, l, m); :}
+    | MIENTRAS APCON Exp1:e CICON SBUCLE ListaInstr:l FMIENTRAS		{: RESULT = new While(e, l); :}
     ;
 Var ::= Var:i ACCESO:a											{: RESULT = new Acceso(i, a); :}
 	| IDV:i														{: RESULT = new Id(i); :} 
@@ -113,17 +118,30 @@ Var ::= Var:i ACCESO:a											{: RESULT = new Acceso(i, a); :}
 Exp ::= BaseE:b													{: RESULT = b; :}
 	| BaseL:l													{: RESULT = l; :}
 	| Var:v														{: RESULT = v; :}
-    | PAP Exp:e PCI												{: RESULT = e; :}
-    | Exp:e1 OPC:o Exp:e2										{: RESULT = new Expr(o, e1, e2); :}
-    | NEG Exp:e													{: RESULT = new Expr(Operadores.NEG, null, e); :}
+    | PAP Exp1:e PCI											{: RESULT = e; :}
+    | NEG Exp1:e												{: RESULT = new Expr(Operadores.NEG, null, e); :}
     ;
-OPC ::= MAYOR													{: RESULT = Operadores.MAYOR; :}
+Exp1 ::= Exp2:e1 OPC1:o Exp2:e2									{: RESULT = new Expr(o, e1, e2); :}
+	| Exp2:e													{: RESULT = e; :}
+	| Exp1:e1 OPC1:o Exp2:e2										{: RESULT = new Expr(o, e1, e2); :}
+	;
+Exp2 ::= Exp3:e1 OPC2:o Exp3:e2									{: RESULT = new Expr(o, e1, e2); :}
+	| Exp3:e													{: RESULT = e; :}
+	| Exp2:e1 OPC2:o Exp3:e2										{: RESULT = new Expr(o, e1, e2); :}
+	;
+Exp3 ::= Exp:e1 OPC3:o Exp:e2									{: RESULT = new Expr(o, e1, e2); :}
+	| Exp:e														{: RESULT = e; :}
+	| Exp3:e1 OPC3:o Exp:e2										{: RESULT = new Expr(o, e1, e2); :}
+	;
+OPC1 ::= MAYOR													{: RESULT = Operadores.MAYOR; :}
 	| MENOR														{: RESULT = Operadores.MENOR; :}
 	| IGUAL														{: RESULT = Operadores.IGUAL; :}
-	| CON														{: RESULT = Operadores.CON; :}
-	| DIS														{: RESULT = Operadores.DIS; :}
+	;
+OPC2 ::= DIS													{: RESULT = Operadores.DIS; :}
 	| MAS														{: RESULT = Operadores.MAS; :}
 	| MENOS														{: RESULT = Operadores.MENOS; :}
+	;
+OPC3 ::= CON													{: RESULT = Operadores.CON; :}
 	| POR														{: RESULT = Operadores.POR; :}
 	| DIV														{: RESULT = Operadores.DIV; :}
 	;

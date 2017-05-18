@@ -22,8 +22,8 @@ public class Main {
 	 SEIC mi = new SEIC();
 	 SETC pt = new SETC();
 	 try{
-		 Symbol s = asint.debug_parse();
-		 //System.out.println((Block) (s.value));
+		 Symbol s = asint.parse();
+		 System.out.println((Block) (s.value));
 		 System.out.println("El código ha pasado con éxito los análisis léxicos y sintácticos.");
 		 mi.parsear(s);
 		 System.out.println("El código ha pasado con éxito la identificación de identificadores.");
