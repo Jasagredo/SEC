@@ -1,4 +1,4 @@
-package tipos;
+package types;
 
 import java.util.Iterator;
 
@@ -19,7 +19,7 @@ import excp.SemanticException;
 import excp.TypeException;
 import java_cup.runtime.Symbol;
 
-public class ParserTipos {
+public class SETC {
 
 	private Tablas t = new Tablas();
 	

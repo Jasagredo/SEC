@@ -1,4 +1,4 @@
-package tipos;
+package types;
 
 import ast.Dec.Tipo;
 import excp.TypeException;

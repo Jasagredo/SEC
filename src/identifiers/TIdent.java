@@ -1,4 +1,4 @@
-package ident;
+package identifiers;
 
 import ast.Dec.Dec;
 import ast.Inst.Inst;

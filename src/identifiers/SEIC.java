@@ -1,4 +1,4 @@
-package ident;
+package identifiers;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -10,11 +10,11 @@ import ast.Inst.*;
 import excp.SemanticException;
 import java_cup.runtime.Symbol;
 
-public class MapaIdent {
+public class SEIC {
 	Map<String, TIdent> mapa;
 	private int nivel;
 	
-	public MapaIdent(){
+	public SEIC(){
 		mapa = new HashMap<String, TIdent>();
 	}
 	
