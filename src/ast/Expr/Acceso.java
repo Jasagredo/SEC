@@ -5,8 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Acceso extends Expr {
-	Id id;
-	List<Expr> dim;
+	public Id id;
+	public List<Expr> dim;
 	public Acceso(Expr i2, String a){
 		if (i2 instanceof Id){
 			id = (Id) i2;

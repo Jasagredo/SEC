@@ -6,8 +6,8 @@ import java.util.List;
 import ast.Expr.Expr;
 
 public class While implements Inst{
-	Expr e;
-	List<Inst> cuerpo;
+	public Expr e;
+	public List<Inst> cuerpo;
 	public While(Expr e, List<Inst> cuerpo) {
 		super();
 		this.e = e;

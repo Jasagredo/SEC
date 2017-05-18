@@ -6,9 +6,9 @@ import java.util.List;
 import ast.Expr.Expr;
 
 public class IfThenElse implements Inst{
-	Expr e;
-	List<Inst> li;
-	List<Inst> le;
+	public Expr e;
+	public List<Inst> li;
+	public List<Inst> le;
 	public IfThenElse(Expr e, List<Inst> li, List<Inst> le) {
 		super();
 		this.e = e;

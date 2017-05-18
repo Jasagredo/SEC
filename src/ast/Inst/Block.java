@@ -6,8 +6,8 @@ import java.util.List;
 import ast.Dec.Dec;
 
 public class Block implements Inst{
-	List<Dec> ld;
-	List<Inst> li;
+	public List<Dec> ld;
+	public List<Inst> li;
 	public Block(List<Dec> ld, List<Inst> li) {
 		super();
 		this.ld = ld;

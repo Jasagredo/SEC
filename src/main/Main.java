@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 import ast.Inst.Block;
+import ident.MapaIdent;
 import java_cup.runtime.ComplexSymbolFactory;
 import java_cup.runtime.Symbol;
 import lexical.SELA;
@@ -15,9 +16,12 @@ public class Main {
      Reader input = new InputStreamReader(new FileInputStream("input.txt"));
 	 SELA sela = new SELA(input, new ComplexSymbolFactory());
 	 parser asint = new parser(sela, new ComplexSymbolFactory());
+	 MapaIdent mi = new MapaIdent();
 	 Symbol s = asint.debug_parse();
+	 mi.parsear(s);
+	 
 	 System.out.println((Block) (s.value));
-	 //comentario
+	 
  }
 }
    

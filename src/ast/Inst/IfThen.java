@@ -5,10 +5,10 @@ import java.util.List;
 
 import ast.Expr.Expr;
 
-public class Ifthen implements Inst{
-	Expr cond;
-	List<Inst> li;
-	public Ifthen(Expr cond, List<Inst> li) {
+public class IfThen implements Inst{
+	public Expr cond;
+	public List<Inst> li;
+	public IfThen(Expr cond, List<Inst> li) {
 		this.cond = cond;
 		this.li = li;
 	}
