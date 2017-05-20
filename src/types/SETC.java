@@ -2,7 +2,6 @@ package types;
 
 import java.util.Iterator;
 
-import ast.Dec.Dec;
 import ast.Dec.Tipo;
 import ast.Expr.Acceso;
 import ast.Expr.BoolConst;

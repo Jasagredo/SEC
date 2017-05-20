@@ -11,14 +11,14 @@ import identifiers.SEIC;
 import java_cup.runtime.ComplexSymbolFactory;
 import java_cup.runtime.Symbol;
 import lexical.SELA;
-import syntactical.parser;
+import syntactical.SESA;
 import types.SETC;
 
 public class Main {
    public static void main(String[] args) throws Exception {
      Reader input = new InputStreamReader(new FileInputStream(args[0]));
 	 SELA sela = new SELA(input, new ComplexSymbolFactory());
-	 parser asint = new parser(sela, new ComplexSymbolFactory());
+	 SESA asint = new SESA(sela, new ComplexSymbolFactory());
 	 SEIC mi = new SEIC();
 	 SETC pt = new SETC();
 	 try{
