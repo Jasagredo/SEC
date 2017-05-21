@@ -1,7 +1,10 @@
 package traduc;
 
 import java.util.Iterator;
+import java.io.PrintWriter;
 import java.util.*;
+
+import ast.Dec.Dec;
 import ast.Dec.Tipo;
 import ast.Expr.Acceso;
 import ast.Expr.BoolConst;
@@ -21,15 +24,33 @@ import types.Tablas;
 public class SETR {
 
 	private List<String> programa = new ArrayList<String>();
+	private PrintWriter out;
+	private int pc = 0;
+	
+	public SETR(PrintWriter o)
+	{
+		out = o;
+	}
 	
 	private void traducirBlock(Block a) throws TypeException {
+		Iterator<Dec> id = a.ld.iterator()
 		Iterator<Inst> ii = a.li.iterator();
+		while(id.hasNext())
+		{
+			Dec d = id.next();
+			traducirDec(d);
+		}
 		while(ii.hasNext()){
 			Inst i = ii.next();
 			traducirInst(i);
 		}
 	}
 	
+	private void traducirDec(Dec d) {
+		
+		
+	}
+
 	private Tipo traducirExpr(Expr e) throws TypeException{
 			try{
 				if (e instanceof Id){
@@ -83,6 +104,7 @@ public class SETR {
 			if (i instanceof Block){
 			traducirBlock((Block) i);
 		} else if (i instanceof Asig) {
+			
 			
 		} else if (i instanceof IfThen) {
 			

@@ -14,6 +14,7 @@ public class Dec {
 	public Id i;
 	public Expr e;
 	public List<Base> ad;
+	public int pos;
 	
 	public Dec(Tipo t, Id i, Expr e){
 		this.t = t;
@@ -48,5 +49,6 @@ public class Dec {
 		}
 		return r;
 	}
+	
 	
 }

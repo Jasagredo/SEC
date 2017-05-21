@@ -11,9 +11,12 @@ import java_cup.runtime.Symbol;
 public class SEIC {
 	Map<String, TIdent> mapa;
 	private int nivel;
+	private int dir;
 	
 	public SEIC(){
 		mapa = new HashMap<String, TIdent>();
+		nivel = 0;
+		dir = 5;
 	}
 	
 	private void entrarBloque(){
@@ -34,6 +37,19 @@ public class SEIC {
 			t = new TIdent(nivel, s, mapa.get(id)); // Remplazamos el anterior valor pero guardando un puntero para restaurarlo al bajar de nivel
 		} else {
 			t = new TIdent(nivel, s, null);
+		}
+		if (t.dec.tc != null)
+		{
+			t.dec.pos = dir;
+			Iterator<Integer> it = t.dec.tc.d.iterator();
+			int k = 1;
+			while(it.hasNext()) k = k*it.next().intValue();
+			dir = dir + k;
+		}
+		else 
+		{
+			t.dec.pos = dir;
+			dir++;
 		}
 		mapa.put(id, t);
 	}

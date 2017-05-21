@@ -1,8 +1,8 @@
 bloque
 Ent e1!
 cons Ent e2!
-Log l1!
 Ent[10][12][15] e3!
+Log l1!
 --
 !
 l1 <·· ¬true!
