@@ -14,7 +14,7 @@ si ¿¬true? entonces
 	e1 <·· 4!
 sino
 	e2 <·· 5!
-	mientras ¿e1 + e2 > e2 * e2 * e2? ...
+	mientras ¿l1 + e2 > e2 * e2 * e2? ...
 		e1 <·· e2!
 	    bloque
 	    Log e2!
