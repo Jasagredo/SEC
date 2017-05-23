@@ -1,13 +1,13 @@
 bloque
 Ent e1!
 cons Ent e2!
-Log l1!
 Ent[10][12][15] e3!
+Log l1!
 --
 !
 l1 <·· ¬true!
 si ¿¬true? entonces
-	e1 <·· 2 + 2 * 5 - -5!
+	e1 <·· 2 + 2 * 5 + -5!
 	si ¿l1? entonces
 		e1 <·· 3!
 	fsi
