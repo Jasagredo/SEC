@@ -48,8 +48,8 @@ non terminal TipoC TipoC;
 non terminal Expr Base;
 non terminal NumConst BaseE;
 non terminal BoolConst BaseL;
-non terminal List<Base> DecArray;
-non terminal List<Base> NumPYC;
+non terminal DArray DecArray;
+non terminal DArray NumPYC;
 non terminal Inst Instr;
 non terminal Expr Var;
 non terminal Operadores OPC1;
@@ -88,8 +88,8 @@ Dec ::= Tipo:t IDV:i FININSTR 									{: RESULT = new Dec(t, new Id(i), null); 
 Tipo ::= ENT													{: RESULT = Tipo.ENT; :}
 	| LOG														{: RESULT = Tipo.LOG; :}
 	;
-TipoC ::= TipoC:t DIM:dim											{: t.d.add(Integer.parseInt(dim.substring(1, dim.length()-1))); RESULT = t; :}
-	| Tipo:t DIM:d 											{: RESULT = new TipoC(t, d); :}
+TipoC ::= TipoC:t DIM:dim										{: t.d.add(Integer.parseInt(dim.substring(1, dim.length()-1))); RESULT = t; :}
+	| Tipo:t DIM:d 												{: RESULT = new TipoC(t, d); :}
 	;
 Base ::= BaseE:b												{: RESULT = b; :}
 	| BaseL:l													{: RESULT = l; :}
@@ -102,8 +102,10 @@ BaseL ::= TRUE													{: RESULT = new BoolConst(true); :}
 	;
 DecArray ::= APACCESO NumPYC:n CIACCESO							{: RESULT = n; :}
 	;
-NumPYC ::= NumPYC:n PYC Base:b									{: n.add((Base)b); RESULT = n; :}									
-	| Base:b													{: List<Base> np = new ArrayList<Base>(); np.add((Base)b); RESULT = np; :}
+NumPYC ::= NumPYC:n PYC Base:b									{: n.lexp.add((Base)b); RESULT = n; :}									
+	| Base:b													{: DArray n = new DArray(); n.lexp.add((Base)b); RESULT = n; :}
+	| NumPYC:n PYC DecArray:dc									{: n.lexp.add((DArray)dc); RESULT = n; :}
+	| DecArray:dc												{: DArray n = new DArray(); n.lexp.add((DArray)dc); RESULT = n; :}
 	;
 Instr ::= FININSTR												{: RESULT = new Vacia(); :}
     | Programa:p												{: RESULT = p; :}

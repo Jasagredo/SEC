@@ -1,7 +1,7 @@
 package ast.Expr;
 
 public abstract class Base extends Expr{
-	int literal;
+	public int literal;
 	
 	public String toString()
 	{

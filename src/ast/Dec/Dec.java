@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import ast.Expr.Base;
+import ast.Expr.DArray;
 import ast.Expr.Expr;
 import ast.Expr.Id;
 
@@ -13,8 +14,9 @@ public class Dec {
 	public TipoC tc;
 	public Id i;
 	public Expr e;
-	public List<Base> ad;
+	public DArray ad;
 	public int pos;
+	public int add;
 	
 	public Dec(Tipo t, Id i, Expr e){
 		this.t = t;
@@ -22,12 +24,12 @@ public class Dec {
 		this.e = e;
 	}
 	
-	public Dec(TipoC t, Id i, List<Base> ad){
+	public Dec(TipoC t, Id i, DArray ad){
 		this.tc = t;
 		this.i = i;
 		this.ad = ad;
 	}
-	
+
 	public String toString(String acc)
 	{
 		String r = acc + "Declaración ";
@@ -36,9 +38,9 @@ public class Dec {
 		{
 			r = r + tc.toString() + " " + i.toString();
 			if (ad != null) { 
-				Iterator<Base> it = ad.iterator();
+				Iterator<Expr> it = ad.lexp.iterator();
 				r = r + "{";
-				while(it.hasNext()) r = r + it.next().toString() + ",";
+				while(it.hasNext()) r = r + (it.next()).toString() + ",";
 				r = r + "}";
 			}
 		}
