@@ -36,7 +36,7 @@ public class Main {
 		 System.out.println("El código ha pasado con éxito la comprobación de tipos.");
 		 tr.traducir(s);
 		 output.close();
-		 System.out.println("El código ha pasado con éxito la comprobación de tipos.");
+		 System.out.println("El código ha pasado con éxito la generación de código.");
 		 
 	 } catch (SemanticException se) {
 		System.err.println(se.getMessage());

@@ -1,6 +1,5 @@
 package traduc;
 
-import java.util.Iterator;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.*;
@@ -29,149 +28,42 @@ public class SETR {
 	private List<String> programa = new ArrayList<String>();
 	private PrintWriter out;
 	private int ic = 0;
+	private int vd = -1;
 	
-	public SETR(PrintWriter o)
-	{
+	public SETR(PrintWriter o) {
 		out = o;
 	}
 	
-	private String traducirBlock(Block a, String s){
-		Iterator<Dec> id = a.ld.iterator();
-		while(id.hasNext()){
-			s += traducirDec(id.next(), s);
+	private void mostrar(String s){
+		out.println(s);
+		switch (s.substring(0, 3)){
+		case "ldc":
+		case "ldo":
+		case "dpl":
+			vd++;
+			break;
+		case "sto":
+			vd -= 2;
+			break;
+		case "add":
+		case "sub":
+		case "mul":
+		case "div":
+		case "neg":
+		case "and":
+		case "or":
+		case "equ":
+		case "les":
+		case "grt":
+		case "sro":
+		case "fjp":
+			vd--;
+			break;
 		}
-		Iterator<Inst> ii = a.li.iterator();
-		while(ii.hasNext()){
-			s += traducirInst(ii.next(), s);
-		}
-		
-		return s;
-	}
-	
-	private String traducirDec(Dec d, String s) {
-		if (d.t != null){
-			d.add = ic;
-			
-			boolean aux = d.e != null;
-			if (d.t == Tipo.ENT) 
-				if (aux) 
-					s += traducirExpr(d.e, s);
-				else 
-					s += "ldc 0;\n"; 
-			else 
-				if (aux) 
-					s += traducirExpr(d.e, s);
-				else 
-					s += "ldc false;\n";
-			ic++;
-			
-			if (aux){
-				s += "ldc 1;\n";
-			} else s += "ldc 0;\n";
-			
-			ic++;
-			
-		} else {
-			d.add = ic;
-			boolean aux = d.tc.t == Tipo.ENT;
-			boolean aux2 = d.e != null;
-			int lon = 0;
-			Iterator<Integer> it = d.tc.d.iterator();
-			while (it.hasNext()) {
-				lon *= it.next();
-			}
-			if (aux)
-				if (aux2){
-					s += traducirDArray(d.ad, s);
-				}
-				else
-					for (int i = 0; i < lon; i++){
-						s += "ldc 0;\n";
-						ic++;
-						s += "ldc 0;\n";
-						ic++;
-					}
-			else
-				if (aux2){
-					s += traducirDArray(d.ad, s);
-				}
-				else
-					for (int i = 0; i < lon; i++){
-						s += "ldc false;\n";
-						ic++;
-						s += "ldc 0;\n";
-						ic++;
-					}
-		}
-		
-		return s;
+		ic++;
 	}
 
-	private String traducirExpr(Expr e, String s) {
-		if (e instanceof Id){
-			s += "ldo "+((Id)e).d.add+";\n";
-		} else if (e instanceof Acceso){
-			
-		} else if (e instanceof BoolConst){
-			if (((BoolConst) e).literal == 1) s += "ldc true;\n";
-			else s += "ldc false;\n";
-		} else if (e instanceof NumConst){
-			s += "ldc "+((NumConst) e).literal +";\n";
-		} else {
-			switch (e.op){
-			case CON:
-				s += traducirExpr(e.valueA,s);
-				s += traducirExpr(e.valueB,s);
-				s += "and;\n";
-				break;
-			case DIS:
-				s += traducirExpr(e.valueA,s);
-				s += traducirExpr(e.valueB,s);
-				s += "or;\n";
-				break;
-			case DIV:
-				s += traducirExpr(e.valueA,s);
-				s += traducirExpr(e.valueB,s);
-				s += "div;\n";
-				break;
-			case IGUAL:
-				s += traducirExpr(e.valueA,s);
-				s += traducirExpr(e.valueB,s);
-				s += "equ;\n";
-				break;
-			case MAS:
-				s += traducirExpr(e.valueA,s);
-				s += traducirExpr(e.valueB,s);
-				s += "add;\n";
-			case MAYOR:
-				s += traducirExpr(e.valueA,s);
-				s += traducirExpr(e.valueB,s);
-				s += "gtr;\n";
-				break;
-			case MENOR:
-				s += traducirExpr(e.valueA,s);
-				s += traducirExpr(e.valueB,s);
-				s += "les;\n";
-			case MENOS:
-				s += traducirExpr(e.valueA,s);
-				s += traducirExpr(e.valueB,s);
-				s += "sub;\n";
-				break;
-			case NEG:
-				s += traducirExpr(e.valueB,s);
-				s += "not;\n";
-				break;
-			default:
-				s += traducirExpr(e.valueA,s);
-				s += traducirExpr(e.valueB,s);
-				s += "mul;\n";
-			}
-		}
-		return s;
-
-	}
-
-	private void traducirBlock(Block a){
+	private void traducirBlock(Block a, boolean b){
 		Iterator<Dec> id = a.ld.iterator();
 		while(id.hasNext()){
 			traducirDec(id.next());
@@ -184,26 +76,23 @@ public class SETR {
 	
 	private void traducirDec(Dec d) {
 		if (d.t != null){
-			d.add = ic;
+			d.add = vd+1;
 			
 			boolean aux = d.e != null;
 			if (d.t == Tipo.ENT) 
 				if (aux) 
 					traducirExpr(d.e);
 				else 
-					out.println("ldc 0;"); 
+					mostrar("ldc 0;"); 
 			else 
 				if (aux) 
 					traducirExpr(d.e);
 				else 
-					out.println("ldc false;");
-			ic++;
+					mostrar("ldc false;");
 			
 			if (aux){
-				out.println("ldc 1;");
-			} else out.println("ldc 0;");
-			
-			ic++;
+				mostrar("ldc 1;");
+			} else mostrar("ldc 0;");
 			
 		} else {
 			d.add = ic;
@@ -220,10 +109,8 @@ public class SETR {
 				}
 				else
 					for (int i = 0; i < lon; i++){
-						out.println("ldc 0;");
-						ic++;
-						out.println("ldc 0;");
-						ic++;
+						mostrar("ldc 0;");
+						mostrar("ldc 0;");
 					}
 			else
 				if (aux2){
@@ -231,31 +118,13 @@ public class SETR {
 				}
 				else
 					for (int i = 0; i < lon; i++){
-						out.println("ldc false;");
-						ic++;
-						out.println("ldc 0;");
-						ic++;
+						mostrar("ldc false;");
+						mostrar("ldc 0;");
 					}
 		}
 		
 	}
 	
-	private String traducirDArray(DArray ad, String s) {
-		Iterator<Expr> ie = ad.lexp.iterator();
-		while (ie.hasNext()){
-			Expr i = ie.next();
-			if (i instanceof DArray){
-				s += traducirDArray((DArray)i, s);
-			} else if (i instanceof Base){
-				s += "ldc "+((Base)i).toString()+";";
-				ic++;
-				s += "ldc 1;";
-				ic++;
-			}
-		}
-		return s;
-	}
-
 	private void traducirDArray(DArray ad) {
 		Iterator<Expr> ie = ad.lexp.iterator();
 		while (ie.hasNext()){
@@ -263,121 +132,84 @@ public class SETR {
 			if (i instanceof DArray){
 				traducirDArray((DArray)i);
 			} else if (i instanceof Base){
-				out.println("ldc "+((Base)i).toString()+";");
-				ic++;
-				out.println("ldc 1;");
-				ic++;
+				mostrar("ldc "+((Base)i).toString()+";");
+				mostrar("ldc 1;");
 			}
 		}
 	}
 
 	private void traducirExpr(Expr e){
 			if (e instanceof Id){
-				out.println("ldo "+((Id)e).d.add+";");
+				mostrar("ldo "+((Id)e).d.add+";");
 			} else if (e instanceof Acceso){
 				
 			} else if (e instanceof BoolConst){
-				if (((BoolConst) e).literal == 1) out.println("ldc true;");
-				else out.println("ldc false;");
+				if (((BoolConst) e).literal == 1) mostrar("ldc true;");
+				else mostrar("ldc false;");
 			} else if (e instanceof NumConst){
-				out.println("ldc "+((NumConst) e).literal +";");
+				mostrar("ldc "+((NumConst) e).literal +";");
 			} else {
 				switch (e.op){
 				case CON:
 					traducirExpr(e.valueA);
 					traducirExpr(e.valueB);
-					out.println("and;");
+					mostrar("and;");
 					break;
 				case DIS:
 					traducirExpr(e.valueA);
 					traducirExpr(e.valueB);
-					out.println("or;");
+					mostrar("or;");
 					break;
 				case DIV:
 					traducirExpr(e.valueA);
 					traducirExpr(e.valueB);
-					out.println("div;");
+					mostrar("div;");
 					break;
 				case IGUAL:
 					traducirExpr(e.valueA);
 					traducirExpr(e.valueB);
-					out.println("equ;");
+					mostrar("equ;");
 					break;
 				case MAS:
 					traducirExpr(e.valueA);
 					traducirExpr(e.valueB);
-					out.println("add;");
+					mostrar("add;");
 					break;
 				case MAYOR:
 					traducirExpr(e.valueA);
 					traducirExpr(e.valueB);
-					out.println("gtr;");
+					mostrar("gtr;");
 					break;
 				case MENOR:
 					traducirExpr(e.valueA);
 					traducirExpr(e.valueB);
-					out.println("les;");
+					mostrar("les;");
 				case MENOS:
 					traducirExpr(e.valueA);
 					traducirExpr(e.valueB);
-					out.println("sub;");
+					mostrar("sub;");
 					break;
 				case NEG:
 					traducirExpr(e.valueB);
-					out.println("not;");
+					mostrar("not;");
 					break;
 				default:
 					traducirExpr(e.valueA);
 					traducirExpr(e.valueB);
-					out.println("mul;");
+					mostrar("mul;");
 				}
 			}
 
 		}
 	
-	private String traducirInst(Inst i, String s){
-		if (i instanceof Block){
-			s += traducirBlock((Block) i, s);
-		} else if (i instanceof Asig) {
-			
-		} else if (i instanceof IfThen) {
-			traducirExpr(((IfThen)i).cond);
-			String s1 = "";
-			Iterator<Inst> ii = ((IfThen) i).li.iterator();
-			while(ii.hasNext()){
-				Inst j = ii.next();
-				traducirInst(j);
-			}
-		} else if (i instanceof IfThenElse) {
-			
-			Iterator<Inst> ii = ((IfThenElse) i).li.iterator();
-			while(ii.hasNext()){
-				Inst j = ii.next();
-				traducirInst(j);
-			}
-			Iterator<Inst> ie = ((IfThenElse) i).le.iterator();
-			while(ie.hasNext()){
-				Inst j = ie.next();
-				traducirInst(j);
-			}
-		} else if (i instanceof While){
-			
-			Iterator<Inst> ii = ((While) i).cuerpo.iterator();
-			while(ii.hasNext()){
-				Inst j = ii.next();
-				traducirInst(j);
-			}
-		} 	
-		return s;
-	}
-	
 	private void traducirInst(Inst i){
 		if (i instanceof Block){
-			traducirBlock((Block) i);
+			traducirBlock((Block) i, false);
 		} else if (i instanceof Asig) {
-			traducirExpr(((Asig)i).e);
 			if (((Asig)i).id instanceof Id){
-				out.println("sro "+((Id)((Asig)i).id).d.add+";");
+				mostrar("ldc "+((Id)((Asig)i).id).d.add+";");
+				traducirExpr(((Asig)i).e);
+				mostrar("sto;");
 			} else {
 				Acceso a = (Acceso)((Asig)i).id;
 				ListIterator<Expr> ie = a.dim.listIterator(a.dim.size());
@@ -390,31 +222,147 @@ public class SETR {
 					mAcum *= aux;
 				}
 				ii = lista.listIterator();
+				ListIterator<Integer> ic = a.id.d.tc.d.listIterator(a.id.d.tc.d.size());
 				int cnt = 0;
 				while(ie.hasPrevious()){
 					traducirExpr(ie.previous());
-					out.println("ldc "+ii.next()+";");
-					out.println("mul;");
+					mostrar("chk 0 "+(ic.previous()-1)+";");
+					mostrar("ldc "+ii.next()+";");
+					mostrar("mul;");
 					cnt++;
 				}
 				for (int p = 0; p < cnt-1; p++){
-					out.println("add;");
+					mostrar("add;");
 				}
-				
-				
-				
-				
+				mostrar("ldc 2;");
+				mostrar("mul;");
+				mostrar("ldc "+a.id.d.add+";");
+				mostrar("add;");
+				mostrar("dpl;");
+				traducirExpr(((Asig)i).e);
+				mostrar("sto;");
+				mostrar("ldc 1;");
+				mostrar("add;");
+				mostrar("ldc 1;");
+				mostrar("sto;");
 			}
+			
 		} else if (i instanceof IfThen) {
 			traducirExpr(((IfThen)i).cond);
-			String s = "";
-			Iterator<Inst> ii = ((IfThen) i).li.iterator();
-			while(ii.hasNext()){
-				Inst j = ii.next();
-				s += traducirInst(j, s);
+			String[] aux = traducirIf((IfThen) i);
+			mostrar("fjp "+(ic+aux.length+1)+";");
+			for (int m = 0; m < aux.length; m++){
+				mostrar(aux[m]);
 			}
 		} else if (i instanceof IfThenElse) {
+			traducirExpr(((IfThenElse)i).e);
+			String[] aux = traducirIfElse((IfThenElse) i);
+			for (int m = 0; m < aux.length; m++){
+				mostrar(aux[m]);
+			}
+		} else if (i instanceof While){
+			int aux2 = ic;
+			traducirExpr(((While)i).e);
+			String[] aux = traducirWhile((While) i);
+			for (int m = 0; m < aux.length; m++){
+				mostrar(aux[m]);
+			}
+			mostrar("ujp "+aux2+";");
+		} 	
+	}
+	
+	
+	
+	private String[] traducirWhile(While i) {
+		List<String> ls = new ArrayList<String>();
+		ListIterator<Inst> lii = i.cuerpo.listIterator();
+		while (lii.hasNext()){
+			ls.addAll(traducirAuxInst(lii.next()));
+		}
+		return ls.toArray(new String[0]);
+	}
+
+	private String[] traducirIfElse(IfThenElse i) {
+		List<String> ls = new ArrayList<String>();
+		ListIterator<Inst> lii = i.li.listIterator();
+		while (lii.hasNext()){
+			ls.addAll(traducirAuxInst(lii.next()));
+		}
+		List<String> ls2 = new ArrayList<String>();
+		ListIterator<Inst> lie = i.le.listIterator();
+		while (lie.hasNext()){
+			ls2.addAll(traducirAuxInst(lie.next()));
+		}
+		ls.add("ujp "+(ic + ls.size() +1 +ls2.size() + 1)+";");
+		ls.add(0, "fjp "+(ic + ls.size()+1)+";");
+		ls.addAll(ls2);
+		return ls.toArray(new String[0]);
+	}
+
+	private String[] traducirIf(IfThen i) {
+		List<String> ls = new ArrayList<String>();
+		ListIterator<Inst> lii = i.li.listIterator();
+		while (lii.hasNext()){
+			ls.addAll(traducirAuxInst(lii.next()));
+		}
+		return ls.toArray(new String[0]);
+	}
+
+	private List<String> traducirAuxInst(Inst i) {
+		List<String> ls = new ArrayList<String>();
+		if (i instanceof Block){
+			ls.addAll(traducirAuxBlock((Block) i));
+		} else if (i instanceof Asig) {
+			if (((Asig)i).id instanceof Id){
+				ls.add("ldc "+((Id)((Asig)i).id).d.add+";");
+				ls.addAll(traducirAuxExpr(((Asig)i).e));
+				ls.add("sto;");
+			} else {
+				Acceso a = (Acceso)((Asig)i).id;
+				ListIterator<Expr> ie = a.dim.listIterator(a.dim.size());
+				ListIterator<Integer> ii = a.id.d.tc.d.listIterator(a.id.d.tc.d.size()); 
+				int mAcum = 1;
+				List<Integer> lista = new ArrayList<Integer>();
+				while (ii.hasPrevious()){
+					int aux = ii.previous();
+					lista.add(mAcum);
+					mAcum *= aux;
+				}
+				ii = lista.listIterator();
+				ListIterator<Integer> ic = a.id.d.tc.d.listIterator(a.id.d.tc.d.size());
+				int cnt = 0;
+				while(ie.hasPrevious()){
+					ls.addAll(traducirAuxExpr(ie.previous()));
+					ls.add("chk 0 "+(ic.previous()-1)+";");
+					ls.add("ldc "+ii.next()+";");
+					ls.add("mul;");
+					cnt++;
+				}
+				for (int p = 0; p < cnt-1; p++){
+					ls.add("add;");
+				}
+				ls.add("ldc 2;");
+				ls.add("mul;");
+				ls.add("ldc "+a.id.d.add+";");
+				ls.add("add;");
+				ls.add("dpl;");
+				ls.addAll(traducirAuxExpr(((Asig)i).e));
+				ls.add("sto;");
+				ls.add("ldc 1;");
+				ls.add("add;");
+				ls.add("ldc 1;");
+				ls.add("sto;");
+			}
 			
+		} else if (i instanceof IfThen) {
+			ls.addAll(traducirAuxExpr(((IfThen)i).cond));
+			String[] aux = traducirIf((IfThen) i);
+			ls.add("fjp "+(ic+aux.length)+";");
+			for (int m = 0; m < aux.length; m++){
+				ls.add(aux[m]);
+			}
+		} else if (i instanceof IfThenElse) {
+			/*
 			Iterator<Inst> ii = ((IfThenElse) i).li.iterator();
 			while(ii.hasNext()){
 				Inst j = ii.next();
@@ -424,22 +372,166 @@ public class SETR {
 			while(ie.hasNext()){
 				Inst j = ie.next();
 				traducirInst(j);
-			}
+			}*/
 		} else if (i instanceof While){
-			
+			/*
 			Iterator<Inst> ii = ((While) i).cuerpo.iterator();
 			while(ii.hasNext()){
 				Inst j = ii.next();
 				traducirInst(j);
-			}
-		} 	
+			}*/
+		}
+		return ls;
 	}
-	
-	
-	
+
+	private List<String> traducirAuxExpr(Expr e) {
+		List<String> ls = new ArrayList<String>();
+		if (e instanceof Id){
+			ls.add("ldo "+((Id)e).d.add+";");
+		} else if (e instanceof Acceso){
+			
+		} else if (e instanceof BoolConst){
+			if (((BoolConst) e).literal == 1) ls.add("ldc true;");
+			else ls.add("ldc false;");
+		} else if (e instanceof NumConst){
+			ls.add("ldc "+((NumConst) e).literal +";");
+		} else {
+			switch (e.op){
+			case CON:
+				ls.addAll(traducirAuxExpr(e.valueA));
+				ls.addAll(traducirAuxExpr(e.valueB));
+				ls.add("and;");
+				break;
+			case DIS:
+				ls.addAll(traducirAuxExpr(e.valueA));
+				ls.addAll(traducirAuxExpr(e.valueB));
+				ls.add("or;");
+				break;
+			case DIV:
+				ls.addAll(traducirAuxExpr(e.valueA));
+				ls.addAll(traducirAuxExpr(e.valueB));
+				ls.add("div;");
+				break;
+			case IGUAL:
+				ls.addAll(traducirAuxExpr(e.valueA));
+				ls.addAll(traducirAuxExpr(e.valueB));
+				ls.add("equ;");
+				break;
+			case MAS:
+				ls.addAll(traducirAuxExpr(e.valueA));
+				ls.addAll(traducirAuxExpr(e.valueB));
+				ls.add("add;");
+				break;
+			case MAYOR:
+				ls.addAll(traducirAuxExpr(e.valueA));
+				ls.addAll(traducirAuxExpr(e.valueB));
+				ls.add("gtr;");
+				break;
+			case MENOR:
+				ls.addAll(traducirAuxExpr(e.valueA));
+				ls.addAll(traducirAuxExpr(e.valueB));
+				ls.add("les;");
+			case MENOS:
+				ls.addAll(traducirAuxExpr(e.valueA));
+				ls.addAll(traducirAuxExpr(e.valueB));
+				ls.add("sub;");
+				break;
+			case NEG:
+				ls.addAll(traducirAuxExpr(e.valueB));
+				ls.add("not;");
+				break;
+			default:
+				ls.addAll(traducirAuxExpr(e.valueA));
+				ls.addAll(traducirAuxExpr(e.valueB));
+				ls.add("mul;");
+			}
+		}
+		return ls;
+	}
+
+	private List<String> traducirAuxBlock(Block a) {
+		List<String> ls = new ArrayList<String>();
+		Iterator<Dec> id = a.ld.iterator();
+		while(id.hasNext()){
+			ls.addAll(traducirAuxDec(id.next()));
+		}
+		Iterator<Inst> ii = a.li.iterator();
+		while(ii.hasNext()){
+			ls.addAll(traducirAuxInst(ii.next()));
+		}
+		return ls;
+	}
+
+	private List<String> traducirAuxDec(Dec d) {
+		List<String> ls = new ArrayList<String>();
+		if (d.t != null){
+			d.add = vd+1;
+			
+			boolean aux = d.e != null;
+			if (d.t == Tipo.ENT) 
+				if (aux) 
+					ls.addAll(traducirAuxExpr(d.e));
+				else 
+					ls.add("ldc 0;"); 
+			else 
+				if (aux) 
+					ls.addAll(traducirAuxExpr(d.e));
+				else 
+					ls.add("ldc false;");
+			
+			if (aux){
+				ls.add("ldc 1;");
+			} else ls.add("ldc 0;");
+			
+		} else {
+			d.add = ic;
+			boolean aux = d.tc.t == Tipo.ENT;
+			boolean aux2 = d.ad != null;
+			int lon = 1;
+			Iterator<Integer> it = d.tc.d.iterator();
+			while (it.hasNext()) {
+				lon *= it.next();
+			}
+			if (aux)
+				if (aux2){
+					ls.addAll(traducirAuxDArray(d.ad));
+				}
+				else
+					for (int i = 0; i < lon; i++){
+						ls.add("ldc 0;");
+						ls.add("ldc 0;");
+					}
+			else
+				if (aux2){
+					ls.addAll(traducirAuxDArray(d.ad));
+				}
+				else
+					for (int i = 0; i < lon; i++){
+						ls.add("ldc false;");
+						ls.add("ldc 0;");
+					}
+		}
+		return ls;
+	}
+
+	private List<String> traducirAuxDArray(DArray ad) {
+		List<String> ls = new ArrayList<String>();
+		Iterator<Expr> ie = ad.lexp.iterator();
+		while (ie.hasNext()){
+			Expr i = ie.next();
+			if (i instanceof DArray){
+				ls.addAll(traducirAuxDArray((DArray)i));
+			} else if (i instanceof Base){
+				ls.add("ldc "+((Base)i).toString()+";");
+				ls.add("ldc 1;");
+			}
+		}
+		return ls;
+	}
+
 	public void traducir(Symbol s){
-		traducirBlock((Block) s.value);
-		out.println("stp;");
+		traducirBlock((Block) s.value, true);
+		mostrar("stp;");
 	}
 
 
