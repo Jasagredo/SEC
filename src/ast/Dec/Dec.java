@@ -1,12 +1,7 @@
 package ast.Dec;
 
 import java.util.Iterator;
-import java.util.List;
-
-import ast.Expr.Base;
-import ast.Expr.DArray;
-import ast.Expr.Expr;
-import ast.Expr.Id;
+import ast.Expr.*;
 
 public class Dec {
 	public boolean cons = false;

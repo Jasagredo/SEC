@@ -1,5 +1,6 @@
 bloque
-Ent[2][3] e1!
+Ent e1!
+Ent e2 <·· 4!
 --
-e1_{1}_{2} <·· 2!
+e1 <·· e1 + 5!
 finbloque
