@@ -41,7 +41,7 @@ public class SETC {
 					parsearDim((DArray) iex2, li2);
 				else if (iex2 instanceof DArray){
 					throw new TypeException("Problema de dimensiones en " + d.toString());
-				}
+				} else if (!li2.isEmpty()) throw new TypeException("Problema de dimensiones en " + d.toString());
 			}
 		} 
 	}

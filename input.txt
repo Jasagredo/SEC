@@ -1,8 +1,11 @@
 bloque
-	Ent[2][3] e2 <·· {{1;2;3};{4;5;6}}!
-	Log e1 <·· true!
-	
+	Ent[2][2] e1 <·· {{1;1};{2;3}}!
+	Ent e2!
+	Log l3 <·· true!
+	Log l4 <·· true!
 --
-	e2_{1}_{2} <·· 12!
+	si ¿¬l3? entonces
+		e2 <·· e1_{1}_{0} + 10!
+	fsi
 finbloque
 
