@@ -4,7 +4,7 @@ bloque
 	Log l3 <·· true!
 	Log l4 <·· true!
 --
-	si ¿¬l3? entonces
+	si ¿¬l3 ~ l3? entonces
 		e2 <·· e1_{1}_{0} + 10!
 	fsi
 finbloque

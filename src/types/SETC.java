@@ -1,24 +1,10 @@
 package types;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
-import ast.Dec.Dec;
-import ast.Dec.Tipo;
-import ast.Expr.Acceso;
-import ast.Expr.Base;
-import ast.Expr.BoolConst;
-import ast.Expr.DArray;
-import ast.Expr.Expr;
-import ast.Expr.Id;
-import ast.Expr.NumConst;
-import ast.Inst.Asig;
-import ast.Inst.Block;
-import ast.Inst.IfThen;
-import ast.Inst.IfThenElse;
-import ast.Inst.Inst;
-import ast.Inst.While;
+import ast.Dec.*;
+import ast.Expr.*;
+import ast.Inst.*;
 import excp.TypeException;
 import java_cup.runtime.Symbol;
 

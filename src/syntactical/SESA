@@ -121,11 +121,10 @@ Exp ::= BaseE:b													{: RESULT = b; :}
 	| BaseL:l													{: RESULT = l; :}
 	| Var:v														{: RESULT = v; :}
     | PAP Exp1:e PCI											{: RESULT = e; :}
-    | NEG Exp1:e												{: RESULT = new Expr(Operadores.NEG, null, e); :}
     ;
 Exp1 ::= Exp2:e1 OPC1:o Exp2:e2									{: RESULT = new Expr(o, e1, e2); :}
 	| Exp2:e													{: RESULT = e; :}
-	| Exp1:e1 OPC1:o Exp2:e2										{: RESULT = new Expr(o, e1, e2); :}
+	| Exp1:e1 OPC1:o Exp2:e2									{: RESULT = new Expr(o, e1, e2); :}
 	;
 Exp2 ::= Exp3:e1 OPC2:o Exp3:e2									{: RESULT = new Expr(o, e1, e2); :}
 	| Exp3:e													{: RESULT = e; :}
@@ -133,7 +132,8 @@ Exp2 ::= Exp3:e1 OPC2:o Exp3:e2									{: RESULT = new Expr(o, e1, e2); :}
 	;
 Exp3 ::= Exp:e1 OPC3:o Exp:e2									{: RESULT = new Expr(o, e1, e2); :}
 	| Exp:e														{: RESULT = e; :}
-	| Exp3:e1 OPC3:o Exp:e2										{: RESULT = new Expr(o, e1, e2); :}
+	| Exp3:e1 OPC3:o Exp:e2										{: RESULT = new Expr(o, e1, e2); :}	
+	| NEG Exp:e												{: RESULT = new Expr(Operadores.NEG, null, e); :}
 	;
 OPC1 ::= MAYOR													{: RESULT = Operadores.MAYOR; :}
 	| MENOR														{: RESULT = Operadores.MENOR; :}

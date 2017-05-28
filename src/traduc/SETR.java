@@ -1,31 +1,15 @@
 package traduc;
 
-import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.*;
 
-import ast.Dec.Dec;
-import ast.Dec.Tipo;
-import ast.Expr.Acceso;
-import ast.Expr.Base;
-import ast.Expr.BoolConst;
-import ast.Expr.DArray;
-import ast.Expr.Expr;
-import ast.Expr.Id;
-import ast.Expr.NumConst;
-import ast.Inst.Asig;
-import ast.Inst.Block;
-import ast.Inst.IfThen;
-import ast.Inst.IfThenElse;
-import ast.Inst.Inst;
-import ast.Inst.While;
-import excp.TypeException;
+import ast.Dec.*;
+import ast.Expr.*;
+import ast.Inst.*;
 import java_cup.runtime.Symbol;
-import types.Tablas;
 
 public class SETR {
 
-	private List<String> programa = new ArrayList<String>();
 	private PrintWriter out;
 	private int ic = 0;
 	private int vd = -1;
