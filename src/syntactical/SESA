@@ -76,14 +76,17 @@ Programa  ::=  BLOQUE ListaDec:ld SEP ListaInstr:li FBLOQUE 	{: RESULT = new Blo
 ListaDec  ::=  Dec:d ListaDec:ld 								{: ld.add(0, d); RESULT = ld; :}
 	| CONS Dec:d ListaDec:ld									{: d.cons = true; ld.add(0, d); RESULT = ld; :}
     |															{: RESULT = new ArrayList<Dec>(); :}
+    | error
     ;
 ListaInstr  ::= ListaInstr:li Instr:i							{: li.add(i); RESULT = li; :}
     | 															{: RESULT = new ArrayList<Inst>(); :}
+    | error
     ;
 Dec ::= Tipo:t IDV:i FININSTR 									{: RESULT = new Dec(t, new Id(i), null); :}
 	| Tipo:t IDV:i ASIG Base:b FININSTR							{: RESULT = new Dec(t, new Id(i), b); :}
 	| TipoC:t IDV:i FININSTR									{: RESULT = new Dec(t, new Id(i), null); :}
 	| TipoC:t IDV:i ASIG DecArray:da FININSTR					{: RESULT = new Dec(t, new Id(i), da); :}
+    | error:e													{: GestionaErrores.gestiona("declaracion de instrucción incorrecta", exleft.getLine(), exleft.getColumn()); :}
     ;
 Tipo ::= ENT													{: RESULT = Tipo.ENT; :}
 	| LOG														{: RESULT = Tipo.LOG; :}

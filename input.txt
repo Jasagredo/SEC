@@ -6,6 +6,8 @@ bloque
 --
 	si ¿¬l3 ~ l3? entonces
 		e2 <·· e1_{1}_{0} + 10!
+	sino
+		e2 <·· 24
 	fsi
 finbloque
 

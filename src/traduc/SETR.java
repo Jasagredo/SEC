@@ -43,7 +43,6 @@ public class SETR {
 					traducirExpr(d.e);
 				else 
 					programa.add("ldc false;");
-			programa.add("sro " + d.pos);
 		} else {
 			boolean aux = d.tc.t == Tipo.ENT;
 			boolean aux2 = d.ad != null;
@@ -82,7 +81,6 @@ public class SETR {
 				dir++;
 			} else if (i instanceof Base){
 				programa.add("ldc "+((Base)i).toString()+";");
-				programa.add("sro "+(pos+dir)+";");
 			}
 			dir++;
 		}
@@ -90,7 +88,8 @@ public class SETR {
 
 	private void traducirExpr(Expr e){
 			if (e instanceof Id){
-				programa.add("lda "+((Id)e).d.pos+";");
+				programa.add("ldc "+((Id)e).d.pos+";");
+				programa.add("ind;");
 			} else if (e instanceof Acceso){
 				Acceso a = (Acceso) e;
 				ListIterator<Expr> ie = a.dim.listIterator(a.dim.size());
@@ -233,12 +232,12 @@ public class SETR {
 				traducirInst(iteratorIf.next());
 			}
 			int ind2 = programa.size(); // donde va la instruccion de salto al final del else
-			programa.add(ind1, "fjp "+programa.size()+";");
+			programa.add(ind1, "fjp "+(programa.size()+3)+";");
 			Iterator<Inst> iteratorElse = (((IfThenElse) i).le).iterator();
 			while(iteratorElse.hasNext()) { //Traducimos las instrucciones de la cláusula IF 
 				traducirInst(iteratorElse.next());
 			}
-			programa.add(ind2, "ujp "+programa.size()+";");
+			programa.add(ind2+1, "ujp "+(programa.size()+2)+";");
 			
 		} else if (i instanceof While){
 			int ind1 = programa.size(); // Donde volver para volver a hacer el bucle
@@ -248,8 +247,8 @@ public class SETR {
 			while (iteratorW.hasNext()){
 				traducirInst(iteratorW.next());
 			}
-			programa.add(ind2,"fjp "+ programa.size() +";"); // Donde se hacía el salto, se salta al final
-			programa.add("ujp "+ ind1 +";");
+			programa.add(ind2+1,"fjp "+ (programa.size()+2) +";"); // Donde se hacía el salto, se salta al final
+			programa.add("ujp "+ (ind1+2) +";");
 		} 	
 	}
 	
