@@ -1,5 +1,5 @@
 bloque
-	Ent[2][2] e1 <·· {{1;1};{2;3}}!
+	Ent[2][2] e1 <·· {{1;1};{1;40}}!
 	Ent e2!
 	Log l3 <·· true!
 	Log l4 <·· true!

@@ -1,15 +1,22 @@
 ldc 1;
+sro 0;
 ldc 1;
-ldc 2;
-ldc 3;
+sro 1;
+ldc 1;
+sro 2;
+ldc 40;
+sro 3;
 ldc 0;
+sro 4
 ldc true;
+sro 5
 ldc true;
-ldo 5;
+sro 6
+lda 5;
 not;
-ldo 5;
+lda 5;
 or;
-fjp 28;
+fjp 36;
 ldc 4;
 ldc 0;
 chk 0 1;

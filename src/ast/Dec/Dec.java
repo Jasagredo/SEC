@@ -1,7 +1,6 @@
 package ast.Dec;
 
 import java.util.Iterator;
-
 import ast.Expr.*;
 
 public class Dec {
@@ -12,7 +11,6 @@ public class Dec {
 	public Expr e;
 	public DArray ad;
 	public int pos;
-	public int add;
 	
 	public Dec(Tipo t, Id i, Expr e){
 		this.t = t;

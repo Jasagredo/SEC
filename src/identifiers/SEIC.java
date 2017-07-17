@@ -16,7 +16,7 @@ public class SEIC {
 	public SEIC(){
 		mapa = new HashMap<String, TIdent>();
 		nivel = 0;
-		dir = 5;
+		dir = 0;
 	}
 	
 	private void entrarBloque(){
