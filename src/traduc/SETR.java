@@ -247,7 +247,7 @@ public class SETR {
 			while (iteratorW.hasNext()){
 				traducirInst(iteratorW.next());
 			}
-			programa.add(ind2+1,"fjp "+ (programa.size()+2) +";"); // Donde se hacía el salto, se salta al final
+			programa.add(ind2,"fjp "+ (programa.size()+3) +";"); // Donde se hacía el salto, se salta al final
 			programa.add("ujp "+ (ind1+1) +";");
 		} 	
 	}
