@@ -8,3 +8,12 @@ src/.DS_Store
 src/lexical/.DS_Store
 src/syntactical/.DS_Store
 /MaquinaP.exe
+Lexer.hi
+Lexer.o
+Main.hi
+Main.o
+Parser.hi
+Parser.o
+desktop.ini
+Main
+

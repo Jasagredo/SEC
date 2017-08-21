@@ -1,15 +1,20 @@
 bloque
-	Ent[2][2] e1 <·· {{1;1};{1;40}}!
-	Ent e2!
+	Ent e1 <·· 1!
+	Ent e2 <·· 0!
+	Ent e3 <·· 0!
 	Log l3 <·· true!
 	Log l4 <·· true!
+	
 --
 	si ¿¬l3 ~ l3? entonces
-		e2 <·· e1_{1}_{0} + 10!
+		mientras ¿e1 < 10? ...
+			si ¿e1 = 5? entonces
+				e3 <·· e3 + 1!
+			fsi
+			e1 <·· e1 + 1!
+		fmientras
+		e2 <·· 5!
 	sino
 		e2 <·· 24!
 	fsi 
-	$
-	r3 <·· 23!
 finbloque
-

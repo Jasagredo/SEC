@@ -9,7 +9,6 @@ import syntactical.parser;
 import traduc.SETR;
 import types.SETC;
 
-
 public class Main {
    public static void main(String[] args) throws Exception {
      Reader input = new InputStreamReader(new FileInputStream(args[0]));
@@ -30,7 +29,9 @@ public class Main {
 		 output.close();
 		 if (!error) System.out.println("El código ha pasado con éxito la generación de código.");
 		 
-	 } catch (SemanticException se) {
+	 } catch (SyntacticException se){
+		 System.err.println("Error sintáctico: " + se.getMessage());
+   	 } catch (SemanticException se) {
 		System.err.println(se.getMessage());
 	 } catch (TypeException te){
 		 System.err.println("Error de tipado: " + te.getMessage());

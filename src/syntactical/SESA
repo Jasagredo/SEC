@@ -79,8 +79,7 @@ ListaInstr  ::= ListaInstr:li Instr:i							{: li.add(i); RESULT = li; :}
 Dec ::= Tipo:t IDV:i FININSTR 									{: RESULT = new Dec(t, new Id(i), null); :}
 	| Tipo:t IDV:i ASIG Base:b FININSTR							{: RESULT = new Dec(t, new Id(i), b); :}
 	| TipoC:t IDV:i FININSTR									{: RESULT = new Dec(t, new Id(i), null); :}
-	| TipoC:t IDV:i ASIG DecArray:da FININSTR					{: RESULT = new Dec(t, new Id(i), da); :}
-	| error:e													{: throw new SyntacticException("array mal definido",exleft.getLine() , exright.getColumn() - exleft.getColumn()); :} 
+	| TipoC:t IDV:i ASIG DecArray:da FININSTR					{: RESULT = new Dec(t, new Id(i), da); :} 
     ;
 Tipo ::= ENT													{: RESULT = Tipo.ENT; :}
 	| LOG														{: RESULT = Tipo.LOG; :}
@@ -103,7 +102,6 @@ NumPYC ::= NumPYC:n PYC Base:b									{: n.lexp.add((Base)b); RESULT = n; :}
 	| Base:b													{: DArray n = new DArray(); n.lexp.add((Base)b); RESULT = n; :}
 	| NumPYC:n PYC DecArray:dc									{: n.lexp.add((DArray)dc); RESULT = n; :}
 	| DecArray:dc												{: DArray n = new DArray(); n.lexp.add((DArray)dc); RESULT = n; :}
-    | error:e													{: throw new SyntacticException("dimension mal definida ", exleft.getLine() , exright.getColumn() - exleft.getColumn()); :} 
     ;
 Instr ::= FININSTR												{: RESULT = new Vacia(); :}
     | Programa:p												{: RESULT = p; :}
@@ -111,7 +109,6 @@ Instr ::= FININSTR												{: RESULT = new Vacia(); :}
     | IF APCON Exp1:e CICON ENTONCES ListaInstr:l FSI			{: RESULT = new IfThen(e, l); :}
     | IF APCON Exp1:e CICON ENTONCES ListaInstr:l SINO ListaInstr:m FSI{: RESULT = new IfThenElse(e, l, m); :}
     | MIENTRAS APCON Exp1:e CICON SBUCLE ListaInstr:l FMIENTRAS		{: RESULT = new While(e, l); :}
-    | error:e													{: throw new SyntacticException("instrucción no reconocida", exleft.getLine(), exright.getColumn() - exleft.getColumn()); :}
     ;
 Var ::= Var:i ACCESO:a											{: RESULT = new Acceso(i, a); :}
 	| IDV:i														{: RESULT = new Id(i); :} 

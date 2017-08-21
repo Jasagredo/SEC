@@ -223,7 +223,7 @@ public class SETR {
 			while(iterator.hasNext()) { //Traducimos las instrucciones de la cláusula IF 
 				traducirInst(iterator.next());
 			}
-			programa.add(ind, "fjp "+(programa.size()+2)+";"); // Añadimos el salto donde tocaba
+			programa.add(ind, "fjp "+(programa.size()+1)+";"); // Añadimos el salto donde tocaba
 		} else if (i instanceof IfThenElse) {
 			traducirExpr(((IfThenElse)i).e);
 			int ind1 = programa.size(); // Donde va la instruccion de salto al else
@@ -232,12 +232,12 @@ public class SETR {
 				traducirInst(iteratorIf.next());
 			}
 			int ind2 = programa.size(); // donde va la instruccion de salto al final del else
-			programa.add(ind1, "fjp "+(programa.size()+3)+";");
+			programa.add(ind1, "fjp "+(programa.size()+2)+";");
 			Iterator<Inst> iteratorElse = (((IfThenElse) i).le).iterator();
 			while(iteratorElse.hasNext()) { //Traducimos las instrucciones de la cláusula IF 
 				traducirInst(iteratorElse.next());
 			}
-			programa.add(ind2+1, "ujp "+(programa.size()+2)+";");
+			programa.add(ind2+1, "ujp "+(programa.size()+1)+";");
 			
 		} else if (i instanceof While){
 			int ind1 = programa.size(); // Donde volver para volver a hacer el bucle
@@ -248,7 +248,7 @@ public class SETR {
 				traducirInst(iteratorW.next());
 			}
 			programa.add(ind2+1,"fjp "+ (programa.size()+2) +";"); // Donde se hacía el salto, se salta al final
-			programa.add("ujp "+ (ind1+2) +";");
+			programa.add("ujp "+ (ind1+1) +";");
 		} 	
 	}
 	
