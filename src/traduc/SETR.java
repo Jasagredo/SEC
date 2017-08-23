@@ -12,10 +12,12 @@ public class SETR {
 
 	private PrintWriter out;
 	private List<String> programa;
+	int desfase;
 	
 	public SETR(PrintWriter o) {
 		out = o;
 		programa = new ArrayList<String>();
+		desfase = 0;
 	}
 
 	private void traducirBlock(Block a){
@@ -220,42 +222,58 @@ public class SETR {
 			traducirExpr(((IfThen)i).cond);
 			int ind = programa.size(); // Donde meteremos la instruccion de salto al final del if
 			Iterator<Inst> iterator = (((IfThen) i).li).iterator();
+			desfase++;
 			while(iterator.hasNext()) { //Traducimos las instrucciones de la cláusula IF 
 				traducirInst(iterator.next());
 			}
-			programa.add(ind, "fjp "+(programa.size()+1)+";"); // Añadimos el salto donde tocaba
+			desfase--;
+			programa.add(ind, "fjp "+(programa.size()+1+desfase)+";"); // Añadimos el salto donde tocaba a el final +1 (la que estamos añadiendo) + nivel (por si en bucles externos hay más que añadir)
 		} else if (i instanceof IfThenElse) {
 			traducirExpr(((IfThenElse)i).e);
 			int ind1 = programa.size(); // Donde va la instruccion de salto al else
 			Iterator<Inst> iteratorIf = (((IfThenElse) i).li).iterator();
+			desfase+=2;
 			while(iteratorIf.hasNext()) { //Traducimos las instrucciones de la cláusula IF 
 				traducirInst(iteratorIf.next());
 			}
+			desfase-=2;
 			int ind2 = programa.size(); // donde va la instruccion de salto al final del else
-			programa.add(ind1, "fjp "+(programa.size()+2)+";");
+			programa.add(ind1, "fjp "+(programa.size()+2+desfase)+";"); // Añadirmos la instrucción para saltar al else
 			Iterator<Inst> iteratorElse = (((IfThenElse) i).le).iterator();
+			desfase+=2;
 			while(iteratorElse.hasNext()) { //Traducimos las instrucciones de la cláusula IF 
 				traducirInst(iteratorElse.next());
 			}
-			programa.add(ind2+1, "ujp "+(programa.size()+1)+";");
+			desfase-=2;
+			programa.add(ind2+1, "ujp "+(programa.size()+1+desfase)+";");
 			
 		} else if (i instanceof While){
 			int ind1 = programa.size(); // Donde volver para volver a hacer el bucle
 			traducirExpr(((While)i).e); 
 			int ind2 = programa.size(); // Donde poner la instruccion de salto para salir
 			ListIterator<Inst> iteratorW = ((While) i).cuerpo.listIterator();
+			desfase++;
 			while (iteratorW.hasNext()){
 				traducirInst(iteratorW.next());
 			}
-			programa.add(ind2,"fjp "+ (programa.size()+3) +";"); // Donde se hacía el salto, se salta al final
-			programa.add("ujp "+ (ind1+1) +";");
+			desfase--;
+			programa.add(ind2,"fjp "+ (programa.size()+2+desfase) +";"); // Donde se hacía el salto, se salta al final
+			programa.add("ujp "+ (ind1+desfase) +";");
 		} 	
 	}
 	
 	public void traducir(Symbol s){
 		traducirBlock((Block) s.value);
 		programa.add("stp;");
-		programa.forEach(item -> out.println(item));
+		int i=0;
+		Iterator<String> it = programa.iterator();
+		String t=" ";
+		while(it.hasNext())
+		{
+			out.println(" {"+t+i+"}  "+it.next());
+			i++;
+			if (i>=10) t="";
+		}
 		out.flush();
 	}
 

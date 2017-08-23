@@ -1,14 +1,18 @@
 bloque
 	Ent e1 <·· 1!
 	Ent e2 <·· 0!
-	Ent e3 <·· 0!
+	Ent e3 <·· 0! %RUEBA PRUEBA
 	Log l3 <·· true!
 	Log l4 <·· true!
 	
 --
 	si ¿false? entonces
 		mientras ¿e1 < 10? ...
-			e1 <·· e1 + 1!
+			si ¿true? entonces 
+				e1 <·· e1 + 1!
+			sino 
+				e3 <·· 150!
+			fsi
 		fmientras
 		e2 <·· 5!
 	fsi 
