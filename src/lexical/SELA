@@ -4,6 +4,7 @@ import java_cup.runtime.ComplexSymbolFactory;
 import java_cup.runtime.ComplexSymbolFactory.Location;
 import java_cup.runtime.Symbol;
 import java.lang.Error;
+import errors.ErrorLexico;
 import java.io.*;
 
 
@@ -23,9 +24,6 @@ import java.io.*;
   public String lexema() {return yytext();}
   public int fila() {return yyline+1;}
   public int columna() {return yychar+1;}
-  public void fijaGestionErrores(SELAErr errores){
-	this.errores = errores;
-  }
   public SELA(Reader r, ComplexSymbolFactory sf){
 	this(r);
         symbolFactory = sf;
@@ -133,4 +131,4 @@ puntoycoma = \;
 {accesoArray}	          {return ops.unidadAccesoArray();}
 {identificadorV}          {return ops.unidadIdV();}
 {operadorMenos}           {return ops.unidadOperadorMenos();}
-.                         {errores.errorLexico(fila(), lexema());}
+.                         {ErrorLexico.errorLexico(fila(), lexema());}

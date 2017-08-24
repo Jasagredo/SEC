@@ -1,13 +1,14 @@
 bloque
 	Ent e1 <·· 1!
 	Ent e2 <·· 0!
-	Ent e3 <·· 0! %RUEBA PRUEBA
+	Ent e3 <·· 0!
 	Log l3 <·· true!
 	Log l4 <·· true!
 	
 --
+
 	si ¿false? entonces
-		mientras ¿e1 < 10? ...
+		mientras ¿e1 < false? ...
 			si ¿true? entonces 
 				e1 <·· e1 + 1!
 			sino 

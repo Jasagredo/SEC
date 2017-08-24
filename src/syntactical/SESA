@@ -8,13 +8,14 @@ import ast.Expr.*;
 import ast.Inst.*;
 import java.util.List;
 import java.util.ArrayList;
-import excp.SyntacticException;
 
 scan with {:
 	return getScanner().next_token(); 
 :};
 parser code {: 
-  
+  public void syntax_error(Symbol unidadLexica){
+				System.err.println("culo");
+			}
 :};
 
 init with {: 

@@ -1,4 +1,4 @@
-package excp;
+package errors;
 
 @SuppressWarnings("serial")
 public class TypeException extends Exception {

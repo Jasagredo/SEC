@@ -1,7 +1,7 @@
 package types;
 
 import ast.Dec.Tipo;
-import excp.TypeException;
+import errors.TypeException;
 
 public class Tablas {
 	

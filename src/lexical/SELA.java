@@ -3,6 +3,7 @@ import java_cup.runtime.ComplexSymbolFactory;
 import java_cup.runtime.ComplexSymbolFactory.Location;
 import java_cup.runtime.Symbol;
 import java.lang.Error;
+import errors.ErrorLexico;
 import java.io.*;
 
 
@@ -22,9 +23,6 @@ public class SELA implements java_cup.runtime.Scanner {
   public String lexema() {return yytext();}
   public int fila() {return yyline+1;}
   public int columna() {return yychar+1;}
-  public void fijaGestionErrores(SELAErr errores){
-	this.errores = errores;
-  }
   public SELA(Reader r, ComplexSymbolFactory sf){
 	this(r);
         symbolFactory = sf;
@@ -35,7 +33,8 @@ public class SELA implements java_cup.runtime.Scanner {
 	return symbolFactory.newSymbol(name, code,new Location(yyline+1,yychar+1-yylength()),new Location(yyline+1,yychar+1));
     }
     public Symbol symbol(String name, int code, String lexem){
-	return symbolFactory.newSymbol(name, code, new Location(yyline+1, yychar +1), new Location(yyline+1,yychar+yylength()), lexem);
+    	Symbol s = symbolFactory.newSymbol(name, code, new Location(yyline+1, yychar +1), new Location(yyline+1,yychar+yylength()), lexem);
+    	return s;
     }
 	private java.io.BufferedReader yy_reader;
 	private int yy_buffer_index;
@@ -449,7 +448,7 @@ public class SELA implements java_cup.runtime.Scanner {
 					case -2:
 						break;
 					case 2:
-						{errores.errorLexico(fila(), lexema());}
+						{ErrorLexico.errorLexico(fila(), lexema());}
 					case -3:
 						break;
 					case 3:
@@ -613,7 +612,7 @@ public class SELA implements java_cup.runtime.Scanner {
 					case -43:
 						break;
 					case 44:
-						{errores.errorLexico(fila(), lexema());}
+						{ErrorLexico.errorLexico(fila(), lexema());}
 					case -44:
 						break;
 					case 45:
@@ -621,7 +620,7 @@ public class SELA implements java_cup.runtime.Scanner {
 					case -45:
 						break;
 					case 47:
-						{errores.errorLexico(fila(), lexema());}
+						{ErrorLexico.errorLexico(fila(), lexema());}
 					case -46:
 						break;
 					case 48:
@@ -629,7 +628,7 @@ public class SELA implements java_cup.runtime.Scanner {
 					case -47:
 						break;
 					case 50:
-						{errores.errorLexico(fila(), lexema());}
+						{ErrorLexico.errorLexico(fila(), lexema());}
 					case -48:
 						break;
 					case 51:

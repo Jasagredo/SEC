@@ -5,7 +5,7 @@ import java.util.*;
 import ast.Dec.*;
 import ast.Expr.*;
 import ast.Inst.*;
-import excp.SemanticException;
+import errors.SemanticException;
 import java_cup.runtime.Symbol;
 
 public class SEIC {
@@ -65,7 +65,7 @@ public class SEIC {
 			try {
 				anadirId(d.i.id, d);
 			} catch (Exception e) {
-				throw new SemanticException("Error semántico: Identificador " + d.i.id + " ya declarado. Tipo de la declaración inicial: " + mapa.get(d.i.id).dec.t.name() + ". Tipo de la nueva declaración: " + d.t.name());
+				throw new SemanticException("Identificador " + d.i.id + " ya declarado. "+ '\n' + "Tipo de la declaración inicial: " + mapa.get(d.i.id).dec.t.name() + '\n' + "Tipo de la nueva declaración: " + d.t.name());
 			}
 		}
 		Iterator<Inst> ii = a.li.iterator();
@@ -81,7 +81,7 @@ public class SEIC {
 				try {
 					((Id) e).d = buscarId(((Id) e).id);
 				} catch (NullPointerException e1){
-					throw new SemanticException("Error semántico: identificador " + ((Id) e).id + " no declarado.");
+					throw new SemanticException("Identificador " + ((Id) e).id + " no declarado.");
 				}
 			} else if (e instanceof Acceso){
 				try {
@@ -92,7 +92,7 @@ public class SEIC {
 						parsearExpr(i);
 					}
 				} catch (NullPointerException e1){
-					throw new SemanticException("Error semántico: identificador " + ((Id) ((Acceso) e).id).id + " no declarado.");
+					throw new SemanticException("Identificador " + ((Id) ((Acceso) e).id).id + " no declarado.");
 				}
 			} else {
 				if (e.valueA != null) parsearExpr(e.valueA);

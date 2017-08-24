@@ -5,7 +5,7 @@ import java.util.*;
 import ast.Dec.*;
 import ast.Expr.*;
 import ast.Inst.*;
-import excp.TypeException;
+import errors.TypeException;
 import java_cup.runtime.Symbol;
 
 public class SETC {

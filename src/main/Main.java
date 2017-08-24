@@ -1,7 +1,8 @@
 package main;
 
 import java.io.*;
-import excp.*;
+
+import errors.*;
 import identifiers.SEIC;
 import java_cup.runtime.*;
 import lexical.SELA;
@@ -29,12 +30,13 @@ public class Main {
 		 output.close();
 		 if (!error) System.out.println("El código ha pasado con éxito la generación de código.");
 		 
-	 } catch (SyntacticException se){
-		 System.err.println("Error sintáctico: " + se.getMessage());
-   	 } catch (SemanticException se) {
+	 }
+	 catch (SemanticException se) {
 		System.err.println(se.getMessage());
 	 } catch (TypeException te){
-		 System.err.println("Error de tipado: " + te.getMessage());
+		 System.err.println("Se ha detectado un ERROR" + '\n' + "Tipo del error: TIPADO"
+					+ '\n' + "A continuación se ofrece una descripción del error. El código no se puede compilar con este error, por favor soluciónelo y vuelva a intentarlo."
+					+ '\n' + '\n' + te.getMessage());
 	 }
    }
    public static boolean error = false;
