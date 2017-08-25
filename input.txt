@@ -1,5 +1,5 @@
 bloque
-	Ent e1 <·· 1!
+	Ent e1 <·· 0!
 	Ent e2 <·· 0!
 	Ent e3 <·· 0!
 	Log l3 <·· true!
@@ -7,14 +7,17 @@ bloque
 	
 --
 
-	si ¿false? entonces
-		mientras ¿e1 < false? ...
-			si ¿true? entonces 
-				e1 <·· e1 + 1!
-			sino 
-				e3 <·· 150!
-			fsi
-		fmientras
-		e2 <·· 5!
-	fsi 
+	mientras ¿e1 < 10? ...
+		bloque
+			Ent e4 <·· 10!
+			Ent e5 <·· 20!
+		--
+			e1 <·· e1 + 1!
+			mientras ¿e2 < e5? ...
+				e2 <·· e2 + 1!
+				e3 <·· e3 + 1!
+			fmientras
+			e2 <·· 0!
+		finbloque
+	fmientras 
 finbloque
