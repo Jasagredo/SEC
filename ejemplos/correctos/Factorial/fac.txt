@@ -1,5 +1,5 @@
 bloque
-	Ent x <·· 15! %Valor del que se quiere hacer el factorial
+	Ent x <·· 7! %Valor del que se quiere hacer el factorial
 	Ent y <·· 1!
 --
 	mientras ¿1 < x? ...

@@ -1,3 +1,5 @@
+%Este programa busca en el array el elemento introducido en obj. Si está, devuelve true en encontrado
+%Si no está devuelve true en bloq. El índice donde está se encuentra en med si hay exito.
 bloque
 	Ent[25] array <·· {2; 3; 5; 7; 11; 13; 17; 19; 23; 29; 31; 37; 41; 43; 47; 53; 59; 61; 67; 71; 73; 79; 83; 89; 97}!
 	Ent min <·· 0! 				%25

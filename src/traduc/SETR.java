@@ -240,11 +240,11 @@ public class SETR {
 			int ind2 = programa.size(); // donde va la instruccion de salto al final del else
 			programa.add(ind1, "fjp "+(programa.size()+2+desfase)+";"); // Añadirmos la instrucción para saltar al else
 			Iterator<Inst> iteratorElse = (((IfThenElse) i).le).iterator();
-			desfase+=2;
+			desfase+=1;
 			while(iteratorElse.hasNext()) { //Traducimos las instrucciones de la cláusula IF 
 				traducirInst(iteratorElse.next());
 			}
-			desfase-=2;
+			desfase-=1;
 			programa.add(ind2+1, "ujp "+(programa.size()+1+desfase)+";");
 			
 		} else if (i instanceof While){
