@@ -1,0 +1,4 @@
+El código ha pasado con éxito los análisis léxicos y sintácticos.
+El código ha pasado con éxito la identificación de identificadores.
+El código ha pasado con éxito la comprobación de tipos.
+El código ha pasado con éxito la generación de código.

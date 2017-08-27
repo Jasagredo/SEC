@@ -1,0 +1,26 @@
+bloque
+	Ent[25] array <·· {2; 3; 5; 7; 11; 13; 17; 19; 23; 29; 31; 37; 41; 43; 47; 53; 59; 61; 67; 71; 73; 79; 83; 89; 97}!
+	Ent min <·· 0! 				%25
+	Ent med! 					%26
+	Ent max <·· 24!				%27
+	Ent obj <·· 67! 			%28
+	Log encontrado <·· false! 	%29
+	Log bloq <·· false! 		%30
+--
+	mientras ¿(encontrado = false) & (bloq = false)? ...
+		si ¿max < min? entonces
+			bloq <·· true!
+		sino
+			med <·· (max + min) / 2!
+			si ¿array_{med} = obj? entonces
+				encontrado <·· true!
+			sino
+				si ¿array_{med} < obj? entonces
+					min <·· med + 1!
+				sino
+					max <·· med - 1!
+				fsi
+			fsi
+		fsi
+	fmientras
+finbloque

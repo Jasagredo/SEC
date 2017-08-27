@@ -13,7 +13,7 @@ import types.SETC;
 public class Main {
    public static void main(String[] args) throws Exception {
      Reader input = new InputStreamReader(new FileInputStream(args[0]));
-     PrintWriter output = new PrintWriter("output.txt", "UTF-8");
+     PrintWriter output = new PrintWriter("output.p", "UTF-8");
 	 SELA sela = new SELA(input, new ComplexSymbolFactory()); 
 	 parser asint = new parser(sela, new ComplexSymbolFactory()); 
 	 SEIC mi = new SEIC();
