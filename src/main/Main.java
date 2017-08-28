@@ -33,7 +33,7 @@ public class Main {
 	 }
 	 catch (ErrorIdentificadores se) {
 		System.err.println(se.getMessage());
-	 } catch (TypeException te){
+	 } catch (ErrorTipos te){
 		 System.err.println("Se ha detectado un ERROR" + '\n' + "Tipo del error: TIPADO"
 					+ '\n' + "A continuación se ofrece una descripción del error. El código no se puede compilar con este error, por favor soluciónelo y vuelva a intentarlo."
 					+ '\n' + '\n' + te.getMessage());
