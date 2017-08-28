@@ -31,7 +31,7 @@ public class Main {
 		 if (!error) System.out.println("El código ha pasado con éxito la generación de código.");
 		 
 	 }
-	 catch (SemanticException se) {
+	 catch (ErrorIdentificadores se) {
 		System.err.println(se.getMessage());
 	 } catch (TypeException te){
 		 System.err.println("Se ha detectado un ERROR" + '\n' + "Tipo del error: TIPADO"
