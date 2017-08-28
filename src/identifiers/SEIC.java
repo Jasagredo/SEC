@@ -5,7 +5,7 @@ import java.util.*;
 import ast.Dec.*;
 import ast.Expr.*;
 import ast.Inst.*;
-import errors.SemanticException;
+import errors.ErrorIdentificadores;
 import java_cup.runtime.Symbol;
 
 public class SEIC {
@@ -58,14 +58,14 @@ public class SEIC {
 			return mapa.get(id).dec; 
 	}
 	
-	private void parsearBlock(Block a) throws SemanticException {
+	private void parsearBlock(Block a) throws ErrorIdentificadores {
 		Iterator<Dec> it = a.ld.iterator();
 		while(it.hasNext()){
 			Dec d = it.next();
 			try {
 				anadirId(d.i.id, d);
 			} catch (Exception e) {
-				throw new SemanticException("Identificador " + d.i.id + " ya declarado. "+ '\n' + "Tipo de la declaración inicial: " + mapa.get(d.i.id).dec.t.name() + '\n' + "Tipo de la nueva declaración: " + d.t.name());
+				throw new ErrorIdentificadores("Identificador " + d.i.id + " ya declarado. "+ '\n' + "Tipo de la declaración inicial: " + mapa.get(d.i.id).dec.t.name() + '\n' + "Tipo de la nueva declaración: " + d.t.name());
 			}
 		}
 		Iterator<Inst> ii = a.li.iterator();
@@ -75,13 +75,13 @@ public class SEIC {
 		}
 	}
 	
-	private void parsearExpr(Expr e) throws SemanticException{
+	private void parsearExpr(Expr e) throws ErrorIdentificadores{
 
 			if (e instanceof Id){
 				try {
 					((Id) e).d = buscarId(((Id) e).id);
 				} catch (NullPointerException e1){
-					throw new SemanticException("Identificador " + ((Id) e).id + " no declarado.");
+					throw new ErrorIdentificadores("Identificador " + ((Id) e).id + " no declarado.");
 				}
 			} else if (e instanceof Acceso){
 				try {
@@ -92,7 +92,7 @@ public class SEIC {
 						parsearExpr(i);
 					}
 				} catch (NullPointerException e1){
-					throw new SemanticException("Identificador " + ((Id) ((Acceso) e).id).id + " no declarado.");
+					throw new ErrorIdentificadores("Identificador " + ((Id) ((Acceso) e).id).id + " no declarado.");
 				}
 			} else {
 				if (e.valueA != null) parsearExpr(e.valueA);
@@ -100,7 +100,7 @@ public class SEIC {
 			}
 		}
 	
-	private void parsearInst(Inst i) throws SemanticException{
+	private void parsearInst(Inst i) throws ErrorIdentificadores{
 		if (i instanceof Block){
 			entrarBloque();
 			parsearBlock((Block) i);
@@ -137,7 +137,7 @@ public class SEIC {
 		} 	
 	}
 
-	public void parsear(Symbol s) throws SemanticException{
+	public void parsear(Symbol s) throws ErrorIdentificadores{
 		parsearBlock((Block) s.value);
 	}
 }

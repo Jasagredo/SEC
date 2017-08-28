@@ -19,7 +19,6 @@ public class SELA implements java_cup.runtime.Scanner {
 	private final int YY_EOF = 65537;
 
   private SELAOperations ops;
-  private SELAErr errores;
   public String lexema() {return yytext();}
   public int fila() {return yyline+1;}
   public int columna() {return yychar+1;}
@@ -33,8 +32,7 @@ public class SELA implements java_cup.runtime.Scanner {
 	return symbolFactory.newSymbol(name, code,new Location(yyline+1,yychar+1-yylength()),new Location(yyline+1,yychar+1));
     }
     public Symbol symbol(String name, int code, String lexem){
-    	Symbol s = symbolFactory.newSymbol(name, code, new Location(yyline+1, yychar +1), new Location(yyline+1,yychar+yylength()), lexem);
-    	return s;
+	return symbolFactory.newSymbol(name, code, new Location(yyline+1, yychar +1), new Location(yyline+1,yychar+yylength()), lexem);
     }
 	private java.io.BufferedReader yy_reader;
 	private int yy_buffer_index;

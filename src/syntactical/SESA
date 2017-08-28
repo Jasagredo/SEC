@@ -1,7 +1,6 @@
 package syntactical;
 
 import lexical.SELA;
-import lexical.SELAErr;
 import java_cup.runtime.ComplexSymbolFactory.ComplexSymbol;
 import ast.Dec.*;
 import ast.Expr.*;
