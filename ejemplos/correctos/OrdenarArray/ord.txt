@@ -1,0 +1,27 @@
+bloque
+	Ent[3][5] array <·· {{1;3;2;4;5};{10;9;8;7;6};{12;15;14;11;13}}!
+	Ent b <·· 0! %15
+	Ent n <·· 5! %16
+	Ent i!		 %17
+	Ent j!		 %18
+	Ent aux!	 %19
+	Ent a!		 %20
+--
+	mientras ¿b < 3? ...
+		i <·· 1!
+		mientras ¿i < n? ...
+			j <·· 0!
+			mientras ¿j < (n - 1)? ...
+				aux <·· j + 1!
+				si ¿array_{b}_{aux} < array_{b}_{j}? entonces
+					a <·· array_{b}_{j}!
+					array_{b}_{j} <·· array_{b}_{aux}!
+					array_{b}_{aux} <·· a!
+				fsi
+				j <·· j + 1!
+			fmientras
+			i <·· i + 1!
+		fmientras
+		b <·· b + 1!
+	fmientras
+finbloque
