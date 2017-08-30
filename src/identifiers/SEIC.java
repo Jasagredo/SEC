@@ -25,7 +25,8 @@ public class SEIC {
 	
 	private void salirBloque(){
 		for (Map.Entry<String, TIdent> entry : mapa.entrySet()) {
-			if (entry.getValue().actual == this.nivel) mapa.put(entry.getKey(), entry.getValue().sigDec); // Restauramos el que estaba a un niel menor (o se pone a null)
+			if (entry.getValue().actual == this.nivel && entry.getValue().sigDec == null) mapa.remove(entry.getKey());
+			else if (entry.getValue().actual == this.nivel) mapa.put(entry.getKey(), entry.getValue().sigDec); // Restauramos el que estaba a un niel menor (o se pone a null)
 		}
 		this.nivel--;
 	}

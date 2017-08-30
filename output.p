@@ -1,0 +1,16 @@
+ { 0}  ldc 4;
+ { 1}  ldc true;
+ { 2}  fjp 7;
+ { 3}  ldc 2;
+ { 4}  ldc 1;
+ { 5}  ldc 6;
+ { 6}  sto;
+ { 7}  ldc 3;
+ { 8}  ldc 2;
+ { 9}  ldc 0;
+ {10}  ind;
+ {11}  ldc 2;
+ {12}  ind;
+ {13}  add;
+ {14}  sto;
+ {15}  stp;
