@@ -1,0 +1,9 @@
+bloque ##
+	Ent x <·· 7! %Valor del que se quiere hacer el factorial
+	Ent y <·· 1!
+--
+	mientras ¿1 < x? ...
+		y <·· x*y!
+		x <·· x - 1!
+	fmientras
+finbloque

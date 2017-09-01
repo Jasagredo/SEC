@@ -1,0 +1,11 @@
+bloque
+	Ent x <·· 12345! %número a invertir
+	Ent x <·· 0!
+	Ent a <·· 0!
+--
+	mientras ¿0 < x? ...
+		a <·· x - (x / 10) * 10!
+		x <·· x / 10!
+		y <·· y * 10 + a!
+	fmientras
+finbloque

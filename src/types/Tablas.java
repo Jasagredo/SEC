@@ -17,9 +17,9 @@ public class Tablas {
 		throw new ErrorTipos("Suma entre expresiones que no son ambas enteros");
 	}
 	
-	public Tipo Cond(Tipo t) throws ErrorTipos{
+	public Tipo Cond(Tipo t, String string) throws ErrorTipos{
 		if (t == Tipo.LOG) return Tipo.LOG;
-		throw new ErrorTipos("Instrucción Si evaluando una expresión no condicional");
+		throw new ErrorTipos("Instrucción \"" + string + "\" evaluando una expresión no condicional");
 	}
 	
 	public Tipo Menos(Tipo t1, Tipo t2) throws ErrorTipos{

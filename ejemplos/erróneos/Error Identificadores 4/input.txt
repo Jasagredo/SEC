@@ -1,0 +1,12 @@
+bloque
+	Ent x <·· 12345! %número a invertir
+	Ent y <·· 0!
+	Ent a <·· 0!
+--
+	bloque
+		Ent z <·· 5!
+	--
+		x <·· z!
+	finbloque
+	y <·· x + z!
+finbloque

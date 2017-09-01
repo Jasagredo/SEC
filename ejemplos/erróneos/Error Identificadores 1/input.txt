@@ -1,0 +1,6 @@
+bloque
+	cons Ent x <·· 4!
+--
+	x <·· 5!
+finbloque
+		

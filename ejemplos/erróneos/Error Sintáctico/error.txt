@@ -1,0 +1,5 @@
+Se ha detectado un ERROR
+Tipo del error: SINTACTICO
+A continuación se ofrece una descripción del error. El código no se puede compilar con este error, por favor soluciónelo y vuelva a intentarlo.
+Fila: 2
+Elemento inesperado: {

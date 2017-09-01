@@ -1,0 +1,7 @@
+El código ha pasado con éxito los análisis léxicos y sintácticos.
+El código ha pasado con éxito la identificación de identificadores.
+Se ha detectado un ERROR
+Tipo del error: TIPADO
+A continuación se ofrece una descripción del error. El código no se puede compilar con este error, por favor soluciónelo y vuelva a intentarlo.
+
+Instrucción "mientras" evaluando una expresión no condicional

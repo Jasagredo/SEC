@@ -108,6 +108,11 @@ public class SEIC {
 			salirBloque();
 		} else if (i instanceof Asig) {
 			parsearExpr(((Asig) i).id);
+			if (((Asig)i).id instanceof Id){
+				if (((Id)((Asig) i).id).d != null && ((Id)((Asig) i).id).d.cons){
+					throw new ErrorIdentificadores("Intento de asignar un valor a constante: "+((Id)((Asig) i).id).id);
+				}
+			}
 			parsearExpr(((Asig) i).e);
 		} else if (i instanceof IfThen) {
 			parsearExpr(((IfThen) i).cond);

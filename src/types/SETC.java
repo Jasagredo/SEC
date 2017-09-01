@@ -114,14 +114,14 @@ public class SETC {
 		} else if (i instanceof Asig) {
 			t.Asig(parsearExpr(((Asig) i).id), parsearExpr(((Asig) i).e));
 		} else if (i instanceof IfThen) {
-			t.Cond(parsearExpr(((IfThen) i).cond));
+			t.Cond(parsearExpr(((IfThen) i).cond), "si");
 			Iterator<Inst> ii = ((IfThen) i).li.iterator();
 			while(ii.hasNext()){
 				Inst j = ii.next();
 				parsearInst(j);
 			}
 		} else if (i instanceof IfThenElse) {
-			t.Cond(parsearExpr(((IfThenElse) i).e));
+			t.Cond(parsearExpr(((IfThenElse) i).e), "si/sino");
 			Iterator<Inst> ii = ((IfThenElse) i).li.iterator();
 			while(ii.hasNext()){
 				Inst j = ii.next();
@@ -133,7 +133,7 @@ public class SETC {
 				parsearInst(j);
 			}
 		} else if (i instanceof While){
-			t.Cond(parsearExpr(((While) i).e));
+			t.Cond(parsearExpr(((While) i).e), "mientras");
 			Iterator<Inst> ii = ((While) i).cuerpo.iterator();
 			while(ii.hasNext()){
 				Inst j = ii.next();
